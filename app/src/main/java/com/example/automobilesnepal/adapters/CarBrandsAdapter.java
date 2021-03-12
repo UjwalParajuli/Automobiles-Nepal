@@ -17,7 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CarBrandsAdapter extends RecyclerView.Adapter<CarBrandsAdapter.ViewHolder> {
-    public static String PACKAGE_NAME;
     ArrayList<CarBrandsModel> carBrandsModelArrayList;
     Context context;
 

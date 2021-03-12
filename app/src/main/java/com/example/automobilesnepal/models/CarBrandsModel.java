@@ -3,7 +3,7 @@ package com.example.automobilesnepal.models;
 import java.io.Serializable;
 
 public class CarBrandsModel implements Serializable {
-    String brand_logo, brand_name;
+    private String brand_logo, brand_name;
 
     public String getBrand_logo() {
         return brand_logo;
