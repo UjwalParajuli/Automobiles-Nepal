@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.automobilesnepal.R;
-import com.example.automobilesnepal.models.CarBrandsModel;
 import com.example.automobilesnepal.models.CarsModel;
 
 import java.util.ArrayList;
@@ -25,7 +24,6 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
         this.carsModelArrayList = carsModelArrayList;
         this.context = context;
     }
-
 
     @NonNull
     @Override
@@ -46,8 +44,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
 
         car_name.setText(carsModel.getCar_name());
         Resources res = context.getResources();
-        int resourceId = res.getIdentifier(
-                carsModel.getCar_image(), "drawable", context.getPackageName() );
+        int resourceId = res.getIdentifier(carsModel.getCar_image(), "drawable", context.getPackageName() );
         car_image.setImageResource(resourceId);
 
     }
@@ -63,7 +60,6 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             car_name = itemView.findViewById(R.id.text_view_car_name);
             car_image = itemView.findViewById(R.id.image_view_cars);
 
