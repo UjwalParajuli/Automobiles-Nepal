@@ -1,5 +1,5 @@
 <resources>
+    <dimen name="grid_item_spacing">2dp</dimen>
     <item name="item_click_support" type="id" />
     <string name="app_name">Automobiles Nepal</string>
-    <dimen name="grid_item_spacing">2dp</dimen>
 </resources>

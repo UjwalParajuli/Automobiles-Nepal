@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.automobilesnepal.adapters.CarsAdapter;
 import com.example.automobilesnepal.models.CarBrandsModel;
@@ -44,6 +45,9 @@ public class BrandCarsListActivity extends AppCompatActivity {
     }
 
     private void setData(){
+        if (bundle.getSerializable("brand_cars_list") == "brand_cars_list"){
+            Toast.makeText(this, "ALl good", Toast.LENGTH_SHORT).show();
+        }
         text_view_brand_title.setText(carBrandsModel.getBrand_name() + " " + "Cars");
     }
 

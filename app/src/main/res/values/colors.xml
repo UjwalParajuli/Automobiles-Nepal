@@ -9,29 +9,8 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary_blue">#01009A</color>
-    <color name="splash_select_label">#9F9FDF</color>
-    <color name="inner_border">#A4A6B3</color>
-    <color name="on_boarding_circle">#FFCF00</color>
-    <color name="on_boarding_circle_two">#C4C4C4</color>
-    <color name="dark_black">#212121</color>
-    <color name="sign_up_back_text">#ACACAC</color>
-    <color name="sign_up_line">#111111</color>
-    <color name="sign_up_button">#B0B0B0</color>
-    <color name="primary_black">#212121</color>
-    <color name="sign_up_error">#FF0D0D</color>
-    <color name="system_blue_light">#007AFF</color>
-    <color name="notification_text">#1E1F20</color>
-    <color name="linear_gradient_1">#7480EA</color>
-    <color name="linear_gradient_2">#D092EE</color>
-    <color name="manage_button">#0935B0</color>
-    <color name="switch_green_light">#34C759</color>
-    <color name="switch_gray_light">#29787880</color>
-    <color name="label_light_secondary">#3C3C43</color>
-    <color name="fragment_background">#F2F2F2</color>
-    <color name="settings_side">#993C3C43</color>
-    <color name="settings_text_view">#80000000</color>
-    <color name="setting_background">#FAFAFA</color>
-    <color name="logout_red">#FA4169</color>
-    <color name="alert_box_create_account">#007AFF</color>
-    <color name="toolbar_background">#F5F5F5</color>
+    <color name="slogan">#747474</color>
+    <color name="button_color">#D32723</color>
+    <color name="dont_have_account">#2D2D2D</color>
+    <color name="login_credentials_heading">#2D2D2D</color>
 </resources>

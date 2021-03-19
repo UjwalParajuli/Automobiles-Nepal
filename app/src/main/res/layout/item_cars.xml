@@ -48,7 +48,7 @@
                         android:id="@+id/text_view_car_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/coco_gothic_heavy_trial"
+                        android:fontFamily="@font/open_sans_regular"
                         android:text="Car Name"
                         android:textColor="@color/black"
                         android:textSize="18sp"
