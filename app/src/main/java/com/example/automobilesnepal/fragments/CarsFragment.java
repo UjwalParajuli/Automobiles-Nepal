@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.automobilesnepal.BrandCarsListActivity;
 import com.example.automobilesnepal.CarDetailsActivity;
@@ -14,6 +15,8 @@ import com.example.automobilesnepal.adapters.CarsAdapter;
 import com.example.automobilesnepal.models.CarBrandsModel;
 import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.utils.ItemClickSupport;
+import com.example.automobilesnepal.utils.SharedPrefManager;
+import com.example.automobilesnepal.utils.User;
 
 import java.util.ArrayList;
 
@@ -45,6 +48,10 @@ public class CarsFragment extends Fragment {
         carBrandsAdapter = new CarBrandsAdapter(carBrandsModelArrayList, getContext());
         newCarsAdapter = new CarsAdapter(newCarsModelArrayList, getContext());
         usedCarsAdapter = new CarsAdapter(usedCarsModelArrayList, getContext());
+
+        User user = SharedPrefManager.getInstance(getContext()).getUser();
+
+        Toast.makeText(getContext(), user.getId() + " " + user.getFull_name(), Toast.LENGTH_LONG).show();
 
         getBrands();
         getNewCars();
