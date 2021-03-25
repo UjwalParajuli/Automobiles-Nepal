@@ -48,7 +48,7 @@
                                 app:sliderAnimationDuration="600"
                                 app:sliderAutoCycleDirection="back_and_forth"
                                 app:sliderIndicatorAnimationDuration="600"
-                                app:sliderIndicatorEnabled="true"
+                                app:sliderIndicatorEnabled="false"
                                 app:sliderIndicatorGravity="center_horizontal|bottom"
                                 app:sliderIndicatorMargin="15dp"
                                 app:sliderIndicatorOrientation="horizontal"
@@ -64,14 +64,110 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/brands_linear_layout"
+                        android:id="@+id/linear_layout_buttons"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:orientation="vertical"
+                        android:layout_marginTop="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/linerar_layout_slider">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <Button
+                                android:id="@+id/button_sell_car"
+                                android:layout_width="158dp"
+                                android:layout_height="55dp"
+                                android:layout_marginStart="33dp"
+                                android:background="@drawable/ic_features_button_background"
+                                android:drawableStart="@drawable/ic_sell_car_icon"
+                                android:drawablePadding="-20dp"
+                                android:fontFamily="@font/coco_gothic_regular"
+                                android:paddingLeft="21dp"
+                                android:text="Sell Car"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="14dp"
+                                app:layout_constraintEnd_toStartOf="@+id/button_compare_cars"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintHorizontal_chainStyle="spread"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <Button
+                                android:id="@+id/button_compare_cars"
+                                android:layout_width="158dp"
+                                android:layout_height="55dp"
+                                android:layout_marginEnd="33dp"
+                                android:background="@drawable/ic_features_button_background_dark"
+                                android:drawableLeft="@drawable/ic_compare"
+                                android:drawablePadding="-10dp"
+                                android:fontFamily="@font/coco_gothic_regular"
+                                android:paddingLeft="21dp"
+                                android:text="Compare"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="14dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/button_sell_car"
+                                app:layout_constraintTop_toTopOf="@+id/button_sell_car" />
+
+                            <Button
+                                android:id="@+id/button_car_accessories"
+                                android:layout_width="158dp"
+                                android:layout_height="55dp"
+                                android:layout_marginStart="33dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/ic_features_button_background_dark"
+                                android:drawableLeft="@drawable/ic_compare"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/coco_gothic_regular"
+                                android:paddingLeft="21dp"
+                                android:text="Accessories"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="14dp"
+                                app:layout_constraintEnd_toStartOf="@+id/button_car_valuation"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/button_sell_car" />
+
+                            <Button
+                                android:id="@+id/button_car_valuation"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="33dp"
+                                android:background="@drawable/ic_features_button_background"
+                                android:drawableLeft="@drawable/ic_sell_car_icon"
+                                android:drawablePadding="-60dp"
+                                android:fontFamily="@font/coco_gothic_regular"
+                                android:paddingLeft="21dp"
+                                android:text="Car&#10;        Valuation"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="14dp"
+                                android:lineHeight="17dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/button_car_accessories"
+                                app:layout_constraintTop_toTopOf="@+id/button_car_accessories" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/brands_linear_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="41dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linear_layout_buttons">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
