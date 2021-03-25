@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +37,7 @@ import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,6 +51,8 @@ public class CarsFragment extends Fragment {
     private CarBrandsAdapter carBrandsAdapter;
     private CarsAdapter newCarsAdapter;
     private CarsAdapter usedCarsAdapter;
+
+    private Button button_sell_car;
 
     @Nullable
     @Override
@@ -79,6 +83,15 @@ public class CarsFragment extends Fragment {
         newCarsAdapter = new CarsAdapter(newCarsModelArrayList, getContext());
         usedCarsAdapter = new CarsAdapter(usedCarsModelArrayList, getContext());
 
+        button_sell_car = (Button) view.findViewById(R.id.button_sell_car);
+        button_sell_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment();
+
+            }
+        });
+
         User user = SharedPrefManager.getInstance(getContext()).getUser();
 
         Toast.makeText(getContext(), user.getId() + " " + user.getFull_name(), Toast.LENGTH_LONG).show();
@@ -89,6 +102,11 @@ public class CarsFragment extends Fragment {
         getNewCars();
         getUsedCars();
         return view;
+    }
+
+    private void openFragment(){
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container, new TestFragment()).addToBackStack(null).commit();
     }
 
     private void getBrands(){
