@@ -1,15 +1,12 @@
 package com.example.automobilesnepal.fragments;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -18,20 +15,16 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.automobilesnepal.BrandCarsListActivity;
 import com.example.automobilesnepal.CarDetailsActivity;
-import com.example.automobilesnepal.LoginActivity;
-import com.example.automobilesnepal.MainActivity;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.adapters.CarBrandsAdapter;
 import com.example.automobilesnepal.adapters.CarsAdapter;
 import com.example.automobilesnepal.adapters.SliderAdapterExample;
 import com.example.automobilesnepal.models.CarBrandsModel;
 import com.example.automobilesnepal.models.CarsModel;
-import com.example.automobilesnepal.models.SliderItem;
 import com.example.automobilesnepal.utils.ErrorUtils;
 import com.example.automobilesnepal.utils.ItemClickSupport;
 import com.example.automobilesnepal.utils.SharedPrefManager;
 import com.example.automobilesnepal.utils.User;
-import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -40,13 +33,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -134,10 +122,10 @@ public class CarsFragment extends Fragment {
     }
 
     private void getNewCars(){
-        CarsModel carsModel = new CarsModel(1, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel2 = new CarsModel(2, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel3 = new CarsModel(3, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel4 = new CarsModel(4, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel = new CarsModel(1, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel2 = new CarsModel(2, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel3 = new CarsModel(3, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel4 = new CarsModel(4, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
 
         newCarsModelArrayList.add(carsModel);
         newCarsModelArrayList.add(carsModel2);
@@ -163,10 +151,10 @@ public class CarsFragment extends Fragment {
     }
 
     private void getUsedCars(){
-        CarsModel carsModel = new CarsModel(1, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel2 = new CarsModel(2, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel3 = new CarsModel(3, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel4 = new CarsModel(4, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel = new CarsModel(1, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel2 = new CarsModel(2, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel3 = new CarsModel(3, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel4 = new CarsModel(4, "thar","mahindra_thar", "Mahindra Thar","Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
 
         usedCarsModelArrayList.add(carsModel);
         usedCarsModelArrayList.add(carsModel2);
@@ -226,8 +214,9 @@ public class CarsFragment extends Fragment {
                             String body_type = jsonResponse.getString("body_type");
                             String image = jsonResponse.getString("image");
                             String price = jsonResponse.getString("price");
+                            String description = jsonResponse.getString("description");
 
-                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type);
+                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type);
                             adapter.addItem(carsModel);
                         }
 

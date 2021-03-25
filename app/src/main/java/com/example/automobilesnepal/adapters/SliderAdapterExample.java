@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.models.CarsModel;
-import com.example.automobilesnepal.models.SliderItem;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
@@ -57,6 +56,7 @@ public class SliderAdapterExample extends
         viewHolder.textViewDescription.setText(sliderItem.getCar_name());
         viewHolder.textViewDescription.setTextSize(18);
         viewHolder.textViewDescription.setTextColor(Color.WHITE);
+        viewHolder.textViewExcerpt.setText(sliderItem.getCar_description());
         Glide.with(viewHolder.itemView)
                 .load(sliderItem.getCar_image())
                 .fitCenter()
@@ -81,13 +81,14 @@ public class SliderAdapterExample extends
         View itemView;
         ImageView imageViewBackground;
         ImageView imageGifContainer;
-        TextView textViewDescription;
+        TextView textViewDescription, textViewExcerpt;
 
         public SliderAdapterVH(View itemView) {
             super(itemView);
             imageViewBackground = itemView.findViewById(R.id.iv_auto_image_slider);
             imageGifContainer = itemView.findViewById(R.id.iv_gif_container);
             textViewDescription = itemView.findViewById(R.id.tv_auto_image_slider);
+            textViewExcerpt = itemView.findViewById(R.id.tv_slider_car_description);
             this.itemView = itemView;
         }
     }

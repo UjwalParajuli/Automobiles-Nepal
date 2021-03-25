@@ -3,10 +3,10 @@ package com.example.automobilesnepal.models;
 import java.io.Serializable;
 
 public class CarsModel implements Serializable {
-    private String brand_logo, car_image, car_name, car_brand, car_mileage, car_fuel_type, car_displacement, car_max_power, car_price, car_max_torque, car_seat_capacity, car_transmission_type, car_boot_space, car_fuel_capacity, car_body_type;
+    private String brand_logo, car_image, car_name, car_brand, car_description, car_mileage, car_fuel_type, car_displacement, car_max_power, car_price, car_max_torque, car_seat_capacity, car_transmission_type, car_boot_space, car_fuel_capacity, car_body_type;
     private int car_model_id;
 
-    public CarsModel(int car_model_id, String brand_logo, String car_image, String car_name, String car_brand, String car_mileage, String car_fuel_type, String car_displacement, String car_max_power, String car_price, String car_max_torque, String car_seat_capacity, String car_transmission_type, String car_boot_space, String car_fuel_capacity, String car_body_type) {
+    public CarsModel(int car_model_id, String brand_logo, String car_image, String car_name, String car_brand, String car_description, String car_mileage, String car_fuel_type, String car_displacement, String car_max_power, String car_price, String car_max_torque, String car_seat_capacity, String car_transmission_type, String car_boot_space, String car_fuel_capacity, String car_body_type) {
         this.car_image = car_image;
         this.car_name = car_name;
         this.car_brand = car_brand;
@@ -23,6 +23,7 @@ public class CarsModel implements Serializable {
         this.car_body_type = car_body_type;
         this.car_model_id = car_model_id;
         this.brand_logo = brand_logo;
+        this.car_description = car_description;
     }
 
     public int getCar_model_id() {
@@ -151,5 +152,13 @@ public class CarsModel implements Serializable {
 
     public void setCar_body_type(String car_body_type) {
         this.car_body_type = car_body_type;
+    }
+
+    public String getCar_description() {
+        return car_description;
+    }
+
+    public void setCar_description(String car_description) {
+        this.car_description = car_description;
     }
 }

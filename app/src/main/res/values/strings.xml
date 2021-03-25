@@ -4,4 +4,5 @@
     <string name="app_name">Automobiles Nepal</string>
     <string name="sign_up">Don\'t have an account?<font color='#D32723'> Sign Up</font></string>
     <string name="login">Already have an account?<font color='#D32723'> Login</font></string>
+    <string name="underline"><u>View full specifications</u></string>
 </resources>
