@@ -6,16 +6,16 @@
         android:title="Cars" />
     <item
         android:id="@+id/nav_bikes"
-        android:icon="@drawable/ic_baseline_bike_scooter_24"
+        android:icon="@drawable/ic_bikes"
         android:title="Bikes" />
     <item
         android:id="@+id/nav_news"
-        android:icon="@drawable/ic_baseline_article_24"
+        android:icon="@drawable/ic_news"
         android:title="News" />
 
     <item
         android:id="@+id/nav_dealers"
-        android:icon="@drawable/ic_baseline_groups_24"
+        android:icon="@drawable/ic_dealers"
         android:title="Dealers" />
 
 </menu>

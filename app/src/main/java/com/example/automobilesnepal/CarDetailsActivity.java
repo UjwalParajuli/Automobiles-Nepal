@@ -42,12 +42,12 @@ public class CarDetailsActivity extends AppCompatActivity {
         Resources res = getResources();
         int resourceId = res.getIdentifier(carsModel.getCar_image(), "drawable", getPackageName() );
         image_view_single_car.setImageResource(resourceId);
-        text_view_single_car_bhp.setText(carsModel.getCar_bhp());
+        text_view_single_car_bhp.setText(carsModel.getCar_mileage());
         text_view_single_car_seat_capacity.setText(carsModel.getCar_seat_capacity());
         text_view_single_car_price.setText(carsModel.getCar_price());
         text_view_single_car_mileage.setText(carsModel.getCar_mileage());
-        text_view_single_car_engine.setText(carsModel.getCar_engine());
-        text_view_single_car_description.setText(carsModel.getCar_description());
+        text_view_single_car_engine.setText(carsModel.getCar_displacement());
+        text_view_single_car_description.setText(carsModel.getCar_body_type());
         text_view_single_car_brand_name.setText(carsModel.getCar_brand());
         text_view_single_car_name.setText(carsModel.getCar_name());
     }
