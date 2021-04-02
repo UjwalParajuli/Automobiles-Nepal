@@ -75,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
                             selected_fragment = new DealersFragment();
                             break;
                     }
-
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selected_fragment).addToBackStack(null).commit();
                     return true;
 
@@ -94,23 +93,23 @@ public class MainActivity extends AppCompatActivity {
             // If there are back-stack entries, leave the FragmentActivity
             // implementation take care of them.
 
-            manager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE); // clear backstack first
-            FragmentTransaction transaction = manager.beginTransaction();
+            manager.popBackStack(); // clear backstack first
+            //FragmentTransaction transaction = manager.beginTransaction();
             if (current instanceof CarsFragment) {
                 bottom_navigation_view.getMenu().findItem(R.id.nav_cars).setChecked(true);
             }
             else if(current instanceof BikesFragment) {
-                bottom_navigation_view.getMenu().findItem(R.id.nav_cars).setChecked(true);
+                bottom_navigation_view.getMenu().findItem(R.id.nav_bikes).setChecked(true);
             }
             else if (current instanceof NewsFragment){
-                bottom_navigation_view.getMenu().findItem(R.id.nav_cars).setChecked(true);
+                bottom_navigation_view.getMenu().findItem(R.id.nav_news).setChecked(true);
             }
             else if (current instanceof DealersFragment){
-                bottom_navigation_view.getMenu().findItem(R.id.nav_cars).setChecked(true);
+                bottom_navigation_view.getMenu().findItem(R.id.nav_dealers).setChecked(true);
             }
 
-            transaction.replace(R.id.fragment_container, new CarsFragment());
-            transaction.commit();
+//            transaction.replace(R.id.fragment_container, new CarsFragment());
+//            transaction.commit();
 
         } else {
             //super.onBackPressed();

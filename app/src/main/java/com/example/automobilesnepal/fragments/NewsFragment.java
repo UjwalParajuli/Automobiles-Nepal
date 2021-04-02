@@ -4,10 +4,25 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.adapters.NewsAdapter;
+import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.models.NewsModel;
+import com.example.automobilesnepal.utils.ErrorUtils;
+import com.example.automobilesnepal.utils.SpacesItemDecoration;
+import com.example.automobilesnepal.utils.VerticalSpacesItemDecoration;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -26,7 +41,7 @@ public class NewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, container, false);
 
-        recycler_view_latest_news = view.findViewById(R.id.recycler_view_latest_news);
+        recycler_view_latest_news = view.findViewById(R.id.recycler_view_news);
         newsModelArrayList = new ArrayList<>();
         newsAdapter = new NewsAdapter(newsModelArrayList, getContext());
 
@@ -35,20 +50,74 @@ public class NewsFragment extends Fragment {
     }
 
     private void getNewsData(){
-        NewsModel newsModel = new NewsModel("maruti_swift", "Maruti Swift", "Maruti Suzuki Swift is a 5 seater Hatchback available in a price range of ₹ 5.73 - 8.41 Lakh. It is available in 9 variants, 1 engine option and 2 transmission options : Manual and AMT. Other key specifications of the Swift include a Kerb Weight of 875 kg and Bootspace of 268 litres.");
-        NewsModel newsModel2 = new NewsModel("mahindra_thar", "Mahindra Thar", "Maruti Suzuki Swift is a 5 seater Hatchback available in a price range of ₹ 5.73 - 8.41 Lakh. It is available in 9 variants, 1 engine option and 2 transmission options : Manual and AMT. Other key specifications of the Swift include a Kerb Weight of 875 kg and Bootspace of 268 litres.");
-        NewsModel newsModel3 = new NewsModel("lamborghini", "Lamborghini", "Maruti Suzuki Swift is a 5 seater Hatchback available in a price range of ₹ 5.73 - 8.41 Lakh. It is available in 9 variants, 1 engine option and 2 transmission options : Manual and AMT. Other key specifications of the Swift include a Kerb Weight of 875 kg and Bootspace of 268 litres.");
-        NewsModel newsModel4 = new NewsModel("hyundai_i20", "Hyundai I20", "Maruti Suzuki Swift is a 5 seater Hatchback available in a price range of ₹ 5.73 - 8.41 Lakh. It is available in 9 variants, 1 engine option and 2 transmission options : Manual and AMT. Other key specifications of the Swift include a Kerb Weight of 875 kg and Bootspace of 268 litres.");
+        String url = "https://automobiles-nepal.000webhostapp.com/android/get_news.php";
 
-        newsModelArrayList.add(newsModel);
-        newsModelArrayList.add(newsModel2);
-        newsModelArrayList.add(newsModel3);
-        newsModelArrayList.add(newsModel4);
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.trim().equals("not_found")) {
+                    Toast.makeText(getContext(), "No any news found", Toast.LENGTH_SHORT).show();
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        recycler_view_latest_news.setLayoutManager(linearLayoutManager);
-        recycler_view_latest_news.setAdapter(newsAdapter);
-        newsAdapter.notifyDataSetChanged();
+                }
+                else{
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonResponse;
+
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            jsonResponse = jsonArray.getJSONObject(i);
+                            int news_id = jsonResponse.getInt("id");
+                            String title = jsonResponse.getString("title");
+                            String photo = jsonResponse.getString("photo");
+                            String description = jsonResponse.getString("description");
+
+                            NewsModel newsModel = new NewsModel(photo, title, description);
+                            newsModelArrayList.add(newsModel);
+                        }
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+                        recycler_view_latest_news.setLayoutManager(linearLayoutManager);
+                        recycler_view_latest_news.setAdapter(newsAdapter);
+                        recycler_view_latest_news.addItemDecoration(new VerticalSpacesItemDecoration(40));
+                        newsAdapter.notifyDataSetChanged();
+
+//                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+//                                CarsModel car_model = carsModelArrayList.get(position);
+//                                Bundle bundle = new Bundle();
+//                                bundle.putSerializable("brand_cars_list", car_model);
+//                                Fragment brandCarsListFragment = new BrandCarsListFragment();
+//                                brandCarsListFragment.setArguments(bundle);
+//                                getFragmentManager()
+//                                        .beginTransaction()
+//                                        .replace(R.id.fragment_container, brandCarsListFragment)
+//                                        .addToBackStack(null).commit();
+//                            }
+//                        });
+
+
+                    }
+
+                    catch (JSONException e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+        };
+        requestQueue.add(stringRequest);
+
+
 
     }
 }

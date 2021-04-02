@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -23,7 +25,9 @@ import com.example.automobilesnepal.adapters.SliderAdapterExample;
 import com.example.automobilesnepal.models.CarBrandsModel;
 import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
+import com.example.automobilesnepal.utils.GridSpacingItemDecoration;
 import com.example.automobilesnepal.utils.ItemClickSupport;
+import com.example.automobilesnepal.utils.SpacesItemDecoration;
 import com.example.automobilesnepal.utils.SharedPrefManager;
 import com.example.automobilesnepal.utils.User;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -34,10 +38,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,6 +60,8 @@ public class CarsFragment extends Fragment {
     private CarsAdapter usedCarsAdapter;
 
     private Button button_sell_car;
+    private TextView text_view_view_all_brands;
+    private TextView text_view_view_all_new_cars;
 
     @Nullable
     @Override
@@ -83,11 +92,22 @@ public class CarsFragment extends Fragment {
         newCarsAdapter = new CarsAdapter(newCarsModelArrayList, getContext());
         usedCarsAdapter = new CarsAdapter(usedCarsModelArrayList, getContext());
 
-        button_sell_car = (Button) view.findViewById(R.id.button_sell_car);
-        button_sell_car.setOnClickListener(new View.OnClickListener() {
+        button_sell_car = view.findViewById(R.id.button_sell_car);
+
+        text_view_view_all_brands = view.findViewById(R.id.text_view_view_all_brands);
+        text_view_view_all_new_cars = view.findViewById(R.id.text_view_view_all_new_cars);
+
+        text_view_view_all_brands.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openFragment();
+                openFragment(new CarBrandsFragment());
+            }
+        });
+
+        text_view_view_all_new_cars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new AllNewCarsFragment());
 
             }
         });
@@ -97,82 +117,176 @@ public class CarsFragment extends Fragment {
         Toast.makeText(getContext(), user.getId() + " " + user.getFull_name(), Toast.LENGTH_LONG).show();
 
         addNewItem();
-        //renewItems();
         getBrands();
         getNewCars();
         getUsedCars();
         return view;
     }
 
-    private void openFragment(){
+    private void openFragment(Fragment fragment){
         FragmentManager manager = getActivity().getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.fragment_container, new TestFragment()).addToBackStack(null).commit();
+        manager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 
     private void getBrands(){
-        CarBrandsModel carBrandsModel = new CarBrandsModel("ford", "Ford");
-        CarBrandsModel carBrandsModel2 = new CarBrandsModel("tesla", "Tesla");
-        CarBrandsModel carBrandsModel3 = new CarBrandsModel("ferrari", "Ferrari");
-        CarBrandsModel carBrandsModel4 = new CarBrandsModel("volkswagen", "Volkswagen");
+        String url = "https://automobiles-nepal.000webhostapp.com/android/get_car_brands.php";
 
-        carBrandsModelArrayList.add(carBrandsModel);
-        carBrandsModelArrayList.add(carBrandsModel2);
-        carBrandsModelArrayList.add(carBrandsModel3);
-        carBrandsModelArrayList.add(carBrandsModel4);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recycler_view_brands.setLayoutManager(linearLayoutManager);
-        recycler_view_brands.setAdapter(carBrandsAdapter);
-        carBrandsAdapter.notifyDataSetChanged();
-
-        ItemClickSupport.addTo(recycler_view_brands).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                CarBrandsModel car_brands_model = carBrandsModelArrayList.get(position);
-                Intent intent = new Intent(getContext(), BrandCarsListActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("brand_cars_list", car_brands_model);
-                intent.putExtras(bundle);
-                startActivity(intent);
+            public void onResponse(String response) {
+                if (response.trim().equals("first_db_error")) {
+                    Toast.makeText(getContext(), "Fetch Database Error", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonResponse;
+
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            jsonResponse = jsonArray.getJSONObject(i);
+                            int brand_id = jsonResponse.getInt("brand_id");
+                            String brand_name = jsonResponse.getString("brand_name");
+                            String brand_logo = jsonResponse.getString("brand_logo");
+
+                            CarBrandsModel carBrandsModel = new CarBrandsModel(brand_logo, brand_name, brand_id);
+                            carBrandsModelArrayList.add(carBrandsModel);
+                        }
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                        recycler_view_brands.setLayoutManager(linearLayoutManager);
+                        recycler_view_brands.setAdapter(carBrandsAdapter);
+                        recycler_view_brands.addItemDecoration(new SpacesItemDecoration(20));
+                        carBrandsAdapter.notifyDataSetChanged();
+
+                        ItemClickSupport.addTo(recycler_view_brands).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                CarBrandsModel car_brands_model = carBrandsModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("brand_cars_list", car_brands_model);
+                                Fragment brandCarsListFragment = new BrandCarsListFragment();
+                                brandCarsListFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, brandCarsListFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
+
+
+                    }
+
+                    catch (JSONException e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
             }
-        });
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+        };
+        requestQueue.add(stringRequest);
 
     }
 
     private void getNewCars(){
-        CarsModel carsModel = new CarsModel(1, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel2 = new CarsModel(2, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel3 = new CarsModel(3, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel4 = new CarsModel(4, "thar","mahindra_thar", "Mahindra Thar", "Mahindra", "Mahindra Thar", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        String url = "https://automobiles-nepal.000webhostapp.com/android/get_new_cars.php";
 
-        newCarsModelArrayList.add(carsModel);
-        newCarsModelArrayList.add(carsModel2);
-        newCarsModelArrayList.add(carsModel3);
-        newCarsModelArrayList.add(carsModel4);
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-        recycler_view_new_cars.setLayoutManager(linearLayoutManager);
-        recycler_view_new_cars.setAdapter(newCarsAdapter);
-        newCarsAdapter.notifyDataSetChanged();
-
-        ItemClickSupport.addTo(recycler_view_new_cars).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
-            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                CarsModel cars_model = newCarsModelArrayList.get(position);
-                Intent intent = new Intent(getContext(), CarDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("car_details", cars_model);
-                intent.putExtras(bundle);
-                startActivity(intent);
+            public void onResponse(String response) {
+                if (response.trim().equals("not_found")) {
+                    Toast.makeText(getContext(), "No any cars found", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonResponse;
+
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            jsonResponse = jsonArray.getJSONObject(i);
+                            int car_model_id = jsonResponse.getInt("car_model_id");
+                            String model_name = jsonResponse.getString("model_name");
+                            String brand_name = jsonResponse.getString("brand_name");
+                            String brand_logo = jsonResponse.getString("brand_logo");
+                            String mileage = jsonResponse.getString("mileage");
+                            String fuel_type = jsonResponse.getString("fuel_type");
+                            String displacement = jsonResponse.getString("displacement");
+                            String max_power = jsonResponse.getString("max_power");
+                            String max_torque = jsonResponse.getString("max_torque");
+                            String seat_capacity = jsonResponse.getString("seat_capacity");
+                            String transmission_type = jsonResponse.getString("transmission_type");
+                            String boot_space = jsonResponse.getString("boot_space");
+                            String fuel_capacity = jsonResponse.getString("fuel_capacity");
+                            String body_type = jsonResponse.getString("body_type");
+                            String image = jsonResponse.getString("image");
+                            String price = jsonResponse.getString("price");
+                            String description = jsonResponse.getString("description");
+                            String video_link = jsonResponse.getString("car_review_video_link");
+                            String car_color = jsonResponse.getString("new_car_color");
+
+                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
+                            newCarsModelArrayList.add(carsModel);
+                        }
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                        recycler_view_new_cars.setLayoutManager(linearLayoutManager);
+                        recycler_view_new_cars.setAdapter(newCarsAdapter);
+                        recycler_view_new_cars.addItemDecoration(new SpacesItemDecoration(20));
+                        newCarsAdapter.notifyDataSetChanged();
+
+//                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+//                                CarsModel car_model = carsModelArrayList.get(position);
+//                                Bundle bundle = new Bundle();
+//                                bundle.putSerializable("brand_cars_list", car_model);
+//                                Fragment brandCarsListFragment = new BrandCarsListFragment();
+//                                brandCarsListFragment.setArguments(bundle);
+//                                getFragmentManager()
+//                                        .beginTransaction()
+//                                        .replace(R.id.fragment_container, brandCarsListFragment)
+//                                        .addToBackStack(null).commit();
+//                            }
+//                        });
+
+
+                    }
+
+                    catch (JSONException e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
             }
-        });
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+        };
+        requestQueue.add(stringRequest);
+
     }
 
     private void getUsedCars(){
-        CarsModel carsModel = new CarsModel(1, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel2 = new CarsModel(2, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel3 = new CarsModel(3, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
-        CarsModel carsModel4 = new CarsModel(4, "thar","mahindra_thar", "Mahindra Thar","Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel");
+        CarsModel carsModel = new CarsModel(1, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel", "youtube", "green");
+        CarsModel carsModel2 = new CarsModel(2, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel", "youtube", "green");
+        CarsModel carsModel3 = new CarsModel(3, "thar","mahindra_thar", "Mahindra Thar", "Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel", "youtube", "green");
+        CarsModel carsModel4 = new CarsModel(4, "thar","mahindra_thar", "Mahindra Thar","Mahindra Thar", "Mahindra", "1997 cc - 2184 cc","130.0 - 150.0 Bhp", "4", "10Km/l", "NPR 90 Lakhs", "Diesel", "57 Litre", "Mahindra Thar is a 4 seater SUV available in a price range of ₹ 10.00 - 14.15 Lakh. It is available in 13 variants, 1 engine option and 2 transmission options : Manual and Automatic (Torque Converter). Other key specifications of the Thar include a Ground Clearance of 219 mm. The Thar is available in 6 colours.", "20", "12l", "diesel", "youtube", "green");
 
         usedCarsModelArrayList.add(carsModel);
         usedCarsModelArrayList.add(carsModel2);
@@ -205,7 +319,7 @@ public class CarsFragment extends Fragment {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if (response.trim().equals("first_db_error")) {
+                if (response.trim().equals("not_found")) {
                     Toast.makeText(getContext(), "Slider Database Error", Toast.LENGTH_SHORT).show();
 
                 }
@@ -233,8 +347,10 @@ public class CarsFragment extends Fragment {
                             String image = jsonResponse.getString("image");
                             String price = jsonResponse.getString("price");
                             String description = jsonResponse.getString("description");
+                            String video_link = "na";
+                            String car_color = "na";
 
-                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type);
+                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
                             adapter.addItem(carsModel);
                         }
 

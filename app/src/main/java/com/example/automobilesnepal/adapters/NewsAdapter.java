@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.models.NewsModel;
@@ -44,11 +45,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         TextView news_excerpt = holder.news_excerpt;
         ImageView news_image = holder.news_image;
 
+        Glide.with(context).load(newsModel.getNews_image()).into(news_image);
         news_title.setText(newsModel.getNews_title());
         news_excerpt.setText(newsModel.getNews_content());
-        Resources res = context.getResources();
-        int resourceId = res.getIdentifier(newsModel.getNews_image(), "drawable", context.getPackageName() );
-        news_image.setImageResource(resourceId);
+
+//        Resources res = context.getResources();
+//        int resourceId = res.getIdentifier(newsModel.getNews_image(), "drawable", context.getPackageName() );
+//        news_image.setImageResource(resourceId);
 
     }
 
@@ -66,7 +69,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             super(itemView);
 
             news_title = itemView.findViewById(R.id.text_view_news_title);
-            news_excerpt = itemView.findViewById(R.id.text_view_news_excerpt);
+            news_excerpt = itemView.findViewById(R.id.text_view_news_description);
             news_image = itemView.findViewById(R.id.image_view_news);
 
         }

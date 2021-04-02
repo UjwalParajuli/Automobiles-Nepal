@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.models.CarBrandsModel;
 
@@ -39,15 +40,9 @@ public class CarBrandsAdapter extends RecyclerView.Adapter<CarBrandsAdapter.View
     public void onBindViewHolder(@NonNull CarBrandsAdapter.ViewHolder holder, int position) {
         CarBrandsModel carBrandsModel = carBrandsModelArrayList.get(position);
 
-        TextView brand_name = holder.brand_name;
         ImageView brand_logo = holder.brand_logo;
 
-        brand_name.setText(carBrandsModel.getBrand_name());
-        Resources res = context.getResources();
-        int resourceId = res.getIdentifier(
-                carBrandsModel.getBrand_logo(), "drawable", context.getPackageName() );
-        brand_logo.setImageResource(resourceId);
-
+        Glide.with(context).load(carBrandsModel.getBrand_logo()).into(holder.brand_logo);
 
     }
 
@@ -57,13 +52,11 @@ public class CarBrandsAdapter extends RecyclerView.Adapter<CarBrandsAdapter.View
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView brand_name;
         public ImageView brand_logo;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            brand_name = itemView.findViewById(R.id.text_view_brand_name);
             brand_logo = itemView.findViewById(R.id.image_view_brands);
 
         }

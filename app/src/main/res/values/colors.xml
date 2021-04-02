@@ -15,4 +15,5 @@
     <color name="border_color">#C6C6C6</color>
     <color name="search_view_color">#F8F8F8</color>
     <color name="slider_desc">#DFDFDF</color>
+    <color name="color_575757">#575757</color>
 </resources>
