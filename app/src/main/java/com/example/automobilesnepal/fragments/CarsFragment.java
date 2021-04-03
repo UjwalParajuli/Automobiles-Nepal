@@ -112,14 +112,22 @@ public class CarsFragment extends Fragment {
             }
         });
 
+        button_sell_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new SellCarFragment());
+            }
+        });
+
         User user = SharedPrefManager.getInstance(getContext()).getUser();
 
         Toast.makeText(getContext(), user.getId() + " " + user.getFull_name(), Toast.LENGTH_LONG).show();
 
         addNewItem();
-        getBrands();
         getNewCars();
         getUsedCars();
+        getBrands();
+
         return view;
     }
 
