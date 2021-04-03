@@ -35,4 +35,9 @@ public class CarBrandsModel implements Serializable {
         this.brand_name = brand_name;
         this.brand_id = brand_id;
     }
+
+    @Override
+    public String toString() {
+        return brand_name;
+    }
 }

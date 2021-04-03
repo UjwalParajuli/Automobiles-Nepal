@@ -180,4 +180,9 @@ public class CarsModel implements Serializable {
     public void setCar_color(String car_color) {
         this.car_color = car_color;
     }
+
+    @Override
+    public String toString() {
+        return car_name;
+    }
 }
