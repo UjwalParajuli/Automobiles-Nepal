@@ -70,7 +70,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
     private ArrayAdapter<CarBrandsModel> carBrandsModelArrayAdapter;
     private ArrayAdapter<CarsModel> carsModelArrayAdapter;
     private ArrayAdapter<String> yearsAdapter;
-    private EditText edit_text_car_color, edit_text_running_km, edit_text_previous_owners, edit_text_selling_location;
+    private EditText edit_text_car_color, edit_text_running_km, edit_text_previous_owners, edit_text_selling_location, edit_text_car_selling_price;
     private int car_model_id;
     private Button button_upload_car;
     private Bitmap bitmap;
@@ -94,6 +94,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
         edit_text_running_km = view.findViewById(R.id.edit_text_car_total_kilometers);
         edit_text_previous_owners = view.findViewById(R.id.edit_text_car_previous_owners);
         edit_text_selling_location = view.findViewById(R.id.edit_text_car_selling_location);
+        edit_text_car_selling_price = view.findViewById(R.id.edit_text_car_selling_price);
 
         image_view_selling_car_image = view.findViewById(R.id.image_view_upload_sell_car);
 
@@ -289,7 +290,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     private void uploadCar(){
-        String selling_car_image, registered_year, car_color, previous_owners, running_km, selling_location;
+        String selling_car_image, registered_year, car_color, previous_owners, running_km, selling_location, selling_price;
         boolean error = false;
         String url = "https://automobiles-nepal.000webhostapp.com/android/upload_car.php";
 
@@ -300,9 +301,35 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
         previous_owners = edit_text_previous_owners.getText().toString().trim();
         running_km = edit_text_running_km.getText().toString().trim();
         selling_location = edit_text_selling_location.getText().toString().trim();
+        selling_price = edit_text_car_selling_price.getText().toString().trim();
 
         if (selling_car_image.isEmpty()){
             Toast.makeText(getContext(), "Please Choose Image", Toast.LENGTH_SHORT).show();
+            error = true;
+        }
+
+        if (car_color.isEmpty()){
+            edit_text_car_color.setError("Please insert car color");
+            error = true;
+        }
+
+        if (previous_owners.isEmpty()){
+            edit_text_previous_owners.setError("Please insert number of previous owners");
+            error = true;
+        }
+
+        if (running_km.isEmpty()){
+            edit_text_running_km.setError("Please insert total running kilometers");
+            error = true;
+        }
+
+        if (selling_location.isEmpty()){
+            edit_text_selling_location.setError("Please insert selling location");
+            error = true;
+        }
+
+        if (selling_price.isEmpty()){
+            edit_text_car_selling_price.setError("Please insert selling price");
             error = true;
         }
 
@@ -350,6 +377,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
                     params.put("running_km", running_km);
                     params.put("selling_location", selling_location);
                     params.put("selling_car_image", selling_car_image);
+                    params.put("selling_car_price", selling_price);
                     params.put("user_id", String.valueOf(user.getId()));
                     return params;
                 }

@@ -106,6 +106,22 @@
                             app:layout_constraintTop_toBottomOf="@id/textView28" />
 
                         <EditText
+                            android:id="@+id/edit_text_car_selling_price"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:hint="NPR"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView31" />
+
+                        <EditText
                             android:id="@+id/edit_text_car_selling_location"
                             android:layout_width="0dp"
                             android:layout_height="41dp"
@@ -251,6 +267,18 @@
                             app:layout_constraintTop_toBottomOf="@id/edit_text_car_previous_owners" />
 
                         <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Selling Price"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_car_total_kilometers" />
+
+                        <TextView
                             android:id="@+id/textView29"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -260,7 +288,7 @@
                             android:textColor="@color/color_575757"
                             android:textSize="14dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/edit_text_car_total_kilometers" />
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_car_selling_price" />
 
                         <TextView
                             android:id="@+id/textView30"

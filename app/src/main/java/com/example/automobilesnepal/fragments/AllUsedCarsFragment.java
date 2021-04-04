@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -16,12 +14,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.adapters.CarsAdapter;
-import com.example.automobilesnepal.models.CarBrandsModel;
+import com.example.automobilesnepal.adapters.UsedCarsAdapter;
 import com.example.automobilesnepal.models.CarsModel;
+import com.example.automobilesnepal.models.UsedCarsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
 import com.example.automobilesnepal.utils.GridSpacingItemDecoration;
-import com.example.automobilesnepal.utils.ItemClickSupport;
-import com.example.automobilesnepal.utils.SpacesItemDecoration;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,50 +30,28 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AllNewCarsFragment extends Fragment {
-
-    private RecyclerView recycler_view_all_new_cars;
-    private ArrayList<CarsModel> carsModelArrayList;
-    private CarsAdapter carsAdapter;
-
-    private ImageButton imageButton;
-    private SearchView searchView;
+public class AllUsedCarsFragment extends Fragment {
+    private RecyclerView recycler_view_all_used_cars;
+    private ArrayList<UsedCarsModel> usedCarsModelArrayList;
+    private UsedCarsAdapter usedCarsAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all_new_cars, container, false);
+        View view = inflater.inflate(R.layout.fragment_all_used_cars, container, false);
 
-        imageButton = view.findViewById(R.id.image_button_bar);
-        searchView = view.findViewById(R.id.search_view);
+        recycler_view_all_used_cars = view.findViewById(R.id.recycler_view_fragment_all_used_cars);
+        usedCarsModelArrayList = new ArrayList<>();
+        usedCarsAdapter = new UsedCarsAdapter(usedCarsModelArrayList, getContext());
 
-        recycler_view_all_new_cars = view.findViewById(R.id.recycler_view_fragment_all_new_cars);
-        carsModelArrayList = new ArrayList<>();
-        carsAdapter = new CarsAdapter(carsModelArrayList, getContext());
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked on all new cars fragment", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked on all new cars fragment", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        getAllNewCars();
+        getAllUsedCars();
         return view;
     }
 
-    private void getAllNewCars(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_new_cars.php";
+    private void getAllUsedCars(){
+        String url = "https://automobiles-nepal.000webhostapp.com/android/get_used_cars.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -94,39 +69,33 @@ public class AllNewCarsFragment extends Fragment {
                         for (int i = 0; i < jsonArray.length(); i++){
                             jsonResponse = jsonArray.getJSONObject(i);
                             int car_model_id = jsonResponse.getInt("car_model_id");
+                            int used_car_id = jsonResponse.getInt("used_car_id");
+                            int posted_by = jsonResponse.getInt("posted_by");
+                            int no_of_previous_owner = jsonResponse.getInt("no_of_previous_owner");
+                            int total_kilometers = jsonResponse.getInt("total_kilometers");
+                            double selling_price = jsonResponse.getDouble("selling_price");
                             String model_name = jsonResponse.getString("model_name");
-                            String brand_name = jsonResponse.getString("brand_name");
-                            String brand_logo = jsonResponse.getString("brand_logo");
-                            String mileage = jsonResponse.getString("mileage");
-                            String fuel_type = jsonResponse.getString("fuel_type");
-                            String displacement = jsonResponse.getString("displacement");
-                            String max_power = jsonResponse.getString("max_power");
-                            String max_torque = jsonResponse.getString("max_torque");
-                            String seat_capacity = jsonResponse.getString("seat_capacity");
-                            String transmission_type = jsonResponse.getString("transmission_type");
-                            String boot_space = jsonResponse.getString("boot_space");
-                            String fuel_capacity = jsonResponse.getString("fuel_capacity");
-                            String body_type = jsonResponse.getString("body_type");
-                            String image = jsonResponse.getString("image");
-                            String price = jsonResponse.getString("price");
-                            String description = jsonResponse.getString("description");
-                            String video_link = jsonResponse.getString("car_review_video_link");
-                            String car_color = jsonResponse.getString("new_car_color");
+                            String registered_year = jsonResponse.getString("registered_year");
+                            String used_car_color = jsonResponse.getString("used_car_color");
+                            String is_verified = jsonResponse.getString("is_verified");
+                            String selling_location = jsonResponse.getString("selling_location");
+                            String used_car_photo = jsonResponse.getString("used_car_photo");
+                            String posted_date = jsonResponse.getString("posted_date");
 
-                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
-                            carsModelArrayList.add(carsModel);
+                            UsedCarsModel usedCarsModel = new UsedCarsModel(used_car_id, car_model_id, posted_by, no_of_previous_owner, total_kilometers, selling_price, registered_year, used_car_color, is_verified, selling_location, used_car_photo, posted_date, model_name);
+                            usedCarsModelArrayList.add(usedCarsModel);
                         }
 
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-                        recycler_view_all_new_cars.setLayoutManager(gridLayoutManager);
+                        recycler_view_all_used_cars.setLayoutManager(gridLayoutManager);
 
                         // Grid item spacing
                         int spanCount = 2; // 3 columns
                         int spacing = 50; // 50px
                         boolean includeEdge = false;
-                        recycler_view_all_new_cars.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
-                        recycler_view_all_new_cars.setAdapter(carsAdapter);
-                        carsAdapter.notifyDataSetChanged();
+                        recycler_view_all_used_cars.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+                        recycler_view_all_used_cars.setAdapter(usedCarsAdapter);
+                        usedCarsAdapter.notifyDataSetChanged();
 
 //                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
 //                            @Override
