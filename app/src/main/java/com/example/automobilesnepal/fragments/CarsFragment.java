@@ -63,7 +63,7 @@ public class CarsFragment extends Fragment {
     private CarsAdapter newCarsAdapter;
     private UsedCarsAdapter usedCarsAdapter;
 
-    private Button button_sell_car;
+    private Button button_sell_car, button_compare_car;
     private TextView text_view_view_all_brands;
     private TextView text_view_view_all_new_cars;
     private TextView text_view_view_all_used_cars;
@@ -105,6 +105,7 @@ public class CarsFragment extends Fragment {
         usedCarsAdapter = new UsedCarsAdapter(usedCarsModelArrayList, getContext());
 
         button_sell_car = view.findViewById(R.id.button_sell_car);
+        button_compare_car = view.findViewById(R.id.button_compare_cars);
 
         text_view_view_all_brands = view.findViewById(R.id.text_view_view_all_brands);
         text_view_view_all_new_cars = view.findViewById(R.id.text_view_view_all_new_cars);
@@ -139,6 +140,13 @@ public class CarsFragment extends Fragment {
             }
         });
 
+        button_compare_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new CompareCarsFragment());
+            }
+        });
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,9 +161,9 @@ public class CarsFragment extends Fragment {
             }
         });
 
-        User user = SharedPrefManager.getInstance(getContext()).getUser();
-
-        Toast.makeText(getContext(), user.getId() + " " + user.getFull_name(), Toast.LENGTH_LONG).show();
+//        User user = SharedPrefManager.getInstance(getContext()).getUser();
+//
+//        Toast.makeText(getContext(), user.getId() + " " + user.getFull_name(), Toast.LENGTH_LONG).show();
 
         addNewItem();
         getNewCars();

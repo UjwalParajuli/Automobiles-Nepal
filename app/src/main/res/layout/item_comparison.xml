@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="194dp">
+
+    <LinearLayout
+        android:id="@+id/comparison_cars_item_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/ic_news_card_border">
+
+                    <ImageView
+                        android:id="@+id/image_view_comparison_car_1_logo"
+                        android:layout_width="37dp"
+                        android:layout_height="14dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="fitStart"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ford" />
+
+                    <ImageView
+                        android:id="@+id/image_view_comparison_car_1_photo"
+                        android:layout_width="128dp"
+                        android:layout_height="71dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintStart_toStartOf="@+id/image_view_comparison_car_1_logo"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_comparison_car_1_logo"
+                        app:srcCompat="@drawable/lamborghini" />
+
+                    <TextView
+                        android:id="@+id/text_view_comparison_car_1_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/coco_gothic_bold"
+                        android:text="Car Name"
+                        android:textColor="@color/login_credentials_heading"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_comparison_car_1_photo"
+                        app:layout_constraintStart_toStartOf="@id/image_view_comparison_car_1_photo"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_comparison_car_1_photo" />
+
+                    <TextView
+                        android:id="@+id/text_view_comparison_car_1_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Rs 10000"
+                        android:textColor="@color/button_color"
+                        android:textSize="12dp"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_comparison_car_1_photo"
+                        app:layout_constraintStart_toStartOf="@id/image_view_comparison_car_1_photo"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_comparison_car_1_name" />
+
+                    <TextView
+                        android:id="@+id/textView35"
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/coco_gothic_bold"
+                        android:text="VS"
+                        android:textColor="@color/button_color"
+                        android:textSize="25dp"
+                        android:textStyle="italic"
+                        app:layout_constraintBottom_toBottomOf="@+id/image_view_comparison_car_2_photo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/image_view_comparison_car_2_photo" />
+
+                    <ImageView
+                        android:id="@+id/image_view_comparison_car_2_logo"
+                        android:layout_width="37dp"
+                        android:layout_height="14dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="fitEnd"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ford" />
+
+                    <ImageView
+                        android:id="@+id/image_view_comparison_car_2_photo"
+                        android:layout_width="128dp"
+                        android:layout_height="71dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_comparison_car_2_logo"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_comparison_car_2_logo"
+                        app:srcCompat="@drawable/lamborghini" />
+
+                    <TextView
+                        android:id="@+id/text_view_comparison_car_2_name"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/coco_gothic_bold"
+                        android:text="Car Name"
+                        android:textColor="@color/login_credentials_heading"
+                        android:textSize="14dp"
+                        android:textDirection="rtl"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_comparison_car_2_photo"
+                        app:layout_constraintStart_toStartOf="@id/image_view_comparison_car_2_photo"
+                        app:layout_constraintTop_toBottomOf="@+id/image_view_comparison_car_2_photo" />
+
+                    <TextView
+                        android:id="@+id/text_view_comparison_car_2_price"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:text="Rs 10000"
+                        android:textColor="@color/button_color"
+                        android:textSize="12dp"
+                        android:textDirection="rtl"
+                        app:layout_constraintEnd_toEndOf="@+id/image_view_comparison_car_2_photo"
+                        app:layout_constraintStart_toStartOf="@id/image_view_comparison_car_2_photo"
+                        app:layout_constraintTop_toBottomOf="@+id/text_view_comparison_car_2_name" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
