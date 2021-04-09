@@ -13,29 +13,20 @@
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_below="@id/toolbar_fragment_compare_car_details"
-        android:layout_marginTop="35dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_fragment_compare_car_details"
+        android:layout_marginTop="35dp">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/textView33"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/coco_gothic_bold"
-                    android:text="Comparison Results"
-                    android:textColor="@color/login_credentials_heading"
-                    android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="@+id/linear_layout_compare_cars"
-                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
                     android:id="@+id/linear_layout_compare_cars"
@@ -169,15 +160,16 @@
 
                 </LinearLayout>
 
-                <View
-                    android:id="@+id/divider1"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="12dp"
-                    android:background="@color/color_E3E3E3"
-                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
-                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
-                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_compare_cars" />
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Comparison Results"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="18dp"
+                    app:layout_constraintStart_toStartOf="@+id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/text_view_detail_comparison_car_1_mileage"
@@ -192,44 +184,34 @@
                     app:layout_constraintStart_toStartOf="@id/divider1"
                     app:layout_constraintTop_toBottomOf="@id/divider1" />
 
-
                 <TextView
                     android:id="@+id/textView38"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/coco_gothic_bold"
                     android:text="Mileage"
+                    android:textAlignment="center"
                     android:textColor="@color/login_credentials_heading"
                     android:textSize="14dp"
-                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_mileage"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_mileage" />
+
 
                 <TextView
                     android:id="@+id/text_view_detail_comparison_car_2_mileage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
-                    android:text="TextView"
+                    android:text="20 km/l"
                     android:textColor="@color/color_575757"
-                    android:textDirection="rtl"
+                    android:textAlignment="textEnd"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_mileage"
                     app:layout_constraintEnd_toEndOf="@+id/divider1"
                     app:layout_constraintStart_toStartOf="@+id/guideline3"
                     app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_mileage" />
-
-                <View
-                    android:id="@+id/divider2"
-                    android:layout_width="0dp"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="16dp"
-                    android:background="@color/color_E3E3E3"
-                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
-                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_mileage" />
 
                 <TextView
                     android:id="@+id/text_view_detail_comparison_car_1_fuel_type"
@@ -244,16 +226,15 @@
                     app:layout_constraintStart_toStartOf="@id/divider2"
                     app:layout_constraintTop_toBottomOf="@id/divider2" />
 
-
                 <TextView
                     android:id="@+id/textView39"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/coco_gothic_bold"
                     android:text="Fuel Type"
+                    android:textAlignment="center"
                     android:textColor="@color/login_credentials_heading"
                     android:textSize="14dp"
-                    android:textAlignment="center"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_fuel_type"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -266,12 +247,451 @@
                     android:fontFamily="@font/roboto_regular"
                     android:text="TextView"
                     android:textColor="@color/color_575757"
-                    android:textDirection="rtl"
+                    android:textAlignment="textEnd"
                     android:textSize="12dp"
                     app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_fuel_type"
                     app:layout_constraintEnd_toEndOf="@+id/divider2"
                     app:layout_constraintStart_toStartOf="@+id/guideline3"
                     app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_fuel_type" />
+
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_displacement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider3"
+                    app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Displacement"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_displacement"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_displacement" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_displacement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_displacement"
+                    app:layout_constraintEnd_toEndOf="@+id/divider3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_displacement" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_max_power"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider4"
+                    app:layout_constraintTop_toBottomOf="@id/divider4" />
+
+
+                <TextView
+                    android:id="@+id/textView41"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Max Power"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_max_power"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_max_power" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_max_power"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_max_power"
+                    app:layout_constraintEnd_toEndOf="@+id/divider4"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_max_power" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_max_torque"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider5"
+                    app:layout_constraintTop_toBottomOf="@id/divider5" />
+
+                <TextView
+                    android:id="@+id/textView42"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Max Torque"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_max_torque"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_max_torque" />
+
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_max_torque"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_max_torque"
+                    app:layout_constraintEnd_toEndOf="@+id/divider5"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_max_torque" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_seat_capacity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider6"
+                    app:layout_constraintTop_toBottomOf="@id/divider6" />
+
+
+                <TextView
+                    android:id="@+id/textView43"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Seat Capacity"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_seat_capacity"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_seat_capacity" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_seat_capacity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_seat_capacity"
+                    app:layout_constraintEnd_toEndOf="@+id/divider6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_seat_capacity" />
+
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_transmission_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider7"
+                    app:layout_constraintTop_toBottomOf="@id/divider7" />
+
+                <TextView
+                    android:id="@+id/textView44"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Transmission Type"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_transmission_type"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_transmission_type" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_transmission_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_transmission_type"
+                    app:layout_constraintEnd_toEndOf="@+id/divider7"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_transmission_type" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_boot_space"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider8"
+                    app:layout_constraintTop_toBottomOf="@id/divider8" />
+
+
+                <TextView
+                    android:id="@+id/textView45"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Boot Space"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_boot_space"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_boot_space" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_boot_space"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_boot_space"
+                    app:layout_constraintEnd_toEndOf="@+id/divider7"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_boot_space" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_fuel_capacity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider9"
+                    app:layout_constraintTop_toBottomOf="@id/divider9" />
+
+                <TextView
+                    android:id="@+id/textView46"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Fuel Capacity"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_fuel_capacity"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_fuel_capacity" />
+
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_fuel_capacity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_fuel_capacity"
+                    app:layout_constraintEnd_toEndOf="@+id/divider6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_fuel_capacity" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_1_body_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textSize="12dp"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline2"
+                    app:layout_constraintStart_toStartOf="@id/divider10"
+                    app:layout_constraintTop_toBottomOf="@id/divider10" />
+
+                <TextView
+                    android:id="@+id/textView47"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/coco_gothic_bold"
+                    android:text="Body Type"
+                    android:textAlignment="center"
+                    android:textColor="@color/login_credentials_heading"
+                    android:textSize="14dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_body_type"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                    app:layout_constraintStart_toStartOf="@+id/guideline2"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_body_type" />
+
+                <TextView
+                    android:id="@+id/text_view_detail_comparison_car_2_body_type"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:text="TextView"
+                    android:textColor="@color/color_575757"
+                    android:textAlignment="textEnd"
+                    android:textSize="12dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/text_view_detail_comparison_car_1_body_type"
+                    app:layout_constraintEnd_toEndOf="@+id/divider6"
+                    app:layout_constraintStart_toStartOf="@+id/guideline3"
+                    app:layout_constraintTop_toTopOf="@+id/text_view_detail_comparison_car_1_body_type" />
+
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/linear_layout_compare_cars" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_mileage" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_fuel_type" />
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_displacement" />
+
+
+                <View
+                    android:id="@+id/divider5"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_max_power" />
+
+                <View
+                    android:id="@+id/divider6"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_max_torque" />
+
+                <View
+                    android:id="@+id/divider7"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_seat_capacity" />
+
+                <View
+                    android:id="@+id/divider8"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_transmission_type" />
+
+
+                <View
+                    android:id="@+id/divider9"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_boot_space" />
+
+                <View
+                    android:id="@+id/divider10"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@color/color_E3E3E3"
+                    app:layout_constraintEnd_toEndOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintStart_toStartOf="@id/linear_layout_compare_cars"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_detail_comparison_car_1_fuel_capacity" />
+
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline2"

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar_fragment_car_valuation"
+        layout="@layout/toolbar"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_below="@id/toolbar_fragment_car_valuation"
+        android:layout_marginTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginEnd="33dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/textView49"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Calculate Car Resale Value"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:textSize="18dp"
+                            android:textColor="@color/login_credentials_heading"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView50"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Purchased Year"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView49" />
+
+                        <Spinner
+                            android:id="@+id/spinner_car_purchased_year"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:spinnerMode="dropdown"
+                            android:background="@drawable/edit_text_background"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView50" />
+
+                        <TextView
+                            android:id="@+id/textView51"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Purchased Price"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_car_purchased_year" />
+
+
+                        <EditText
+                            android:id="@+id/edit_text_car_purchased_price"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:hint="NPR"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView51" />
+
+                        <Button
+                            android:id="@+id/button_calculate_car_value"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="27dp"
+                            android:background="@drawable/button_background"
+                            android:fontFamily="@font/coco_gothic_regular"
+                            android:text="Calculate"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="18dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_car_purchased_price" />
+
+                        <LinearLayout
+                            android:id="@+id/linear_layout_car_calculation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="32dp"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/button_calculate_car_value">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/textView36"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="32dp"
+                                    android:text="Car Resale Value as of Today's Date"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:textColor="@color/color_575757"
+                                    android:textSize="14dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/text_view_car_resale_value"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/roboto_bold"
+                                    android:text="Rs 500000"
+                                    android:textColor="@color/button_color"
+                                    android:textSize="18dp"
+                                    android:textAlignment="center"
+                                    app:layout_constraintEnd_toEndOf="@+id/textView36"
+                                    app:layout_constraintStart_toStartOf="@+id/textView36"
+                                    app:layout_constraintTop_toBottomOf="@id/textView36" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

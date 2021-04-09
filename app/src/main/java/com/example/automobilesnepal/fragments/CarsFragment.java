@@ -63,7 +63,7 @@ public class CarsFragment extends Fragment {
     private CarsAdapter newCarsAdapter;
     private UsedCarsAdapter usedCarsAdapter;
 
-    private Button button_sell_car, button_compare_car;
+    private Button button_sell_car, button_compare_car, button_accessories, button_car_valuation;
     private TextView text_view_view_all_brands;
     private TextView text_view_view_all_new_cars;
     private TextView text_view_view_all_used_cars;
@@ -106,6 +106,8 @@ public class CarsFragment extends Fragment {
 
         button_sell_car = view.findViewById(R.id.button_sell_car);
         button_compare_car = view.findViewById(R.id.button_compare_cars);
+        button_accessories = view.findViewById(R.id.button_car_accessories);
+        button_car_valuation = view.findViewById(R.id.button_car_valuation);
 
         text_view_view_all_brands = view.findViewById(R.id.text_view_view_all_brands);
         text_view_view_all_new_cars = view.findViewById(R.id.text_view_view_all_new_cars);
@@ -144,6 +146,20 @@ public class CarsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openFragment(new CompareCarsFragment());
+            }
+        });
+
+        button_accessories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new CarAccessoriesFragment());
+            }
+        });
+
+        button_car_valuation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new CarValuationFragment());
             }
         });
 

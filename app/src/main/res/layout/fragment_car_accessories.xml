@@ -6,12 +6,12 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/toolbar_fragment_all_used_cars"
+        android:id="@+id/toolbar_fragment_car_accessories"
         layout="@layout/toolbar"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_below="@id/toolbar_fragment_all_used_cars"
+        android:layout_below="@id/toolbar_fragment_car_accessories"
         android:layout_marginTop="35dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -39,10 +39,10 @@
 
 
                         <TextView
-                            android:id="@+id/textView32"
+                            android:id="@+id/textView48"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="All Used Cars"
+                            android:text="Car Accessories"
                             android:fontFamily="@font/coco_gothic_bold"
                             android:textSize="18dp"
                             android:textColor="@color/login_credentials_heading"
@@ -50,7 +50,7 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recycler_view_fragment_all_used_cars"
+                            android:id="@+id/recycler_view_all_car_accessories"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_marginTop="20dp"
@@ -58,10 +58,12 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView32" />
+                            app:layout_constraintTop_toBottomOf="@+id/textView48" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
                 </LinearLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
