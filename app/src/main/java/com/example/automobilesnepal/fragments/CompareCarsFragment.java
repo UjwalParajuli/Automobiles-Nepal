@@ -111,7 +111,7 @@ public class CompareCarsFragment extends Fragment {
     }
 
     private void selectFirstCar(View v){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_new_cars.php";
+        String url = "http://192.168.1.65:81/android/get_new_cars.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -140,7 +140,7 @@ public class CompareCarsFragment extends Fragment {
                             public boolean onMenuItemClick(MenuItem item) {
                                 int i = item.getItemId();
 
-                                String url = "https://automobiles-nepal.000webhostapp.com/android/get_compare_cars.php";
+                                String url = "http://192.168.1.65:81/android/get_compare_cars.php";
 
                                 final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
                                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -255,7 +255,7 @@ public class CompareCarsFragment extends Fragment {
     }
 
     private void selectSecondCar(View v){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_new_cars.php";
+        String url = "http://192.168.1.65:81/android/get_new_cars.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -284,7 +284,7 @@ public class CompareCarsFragment extends Fragment {
                             public boolean onMenuItemClick(MenuItem item) {
                                 int i = item.getItemId();
 
-                                String url = "https://automobiles-nepal.000webhostapp.com/android/get_compare_cars.php";
+                                String url = "http://192.168.1.65:81/android/get_compare_cars.php";
 
                                 final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
                                 StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -400,7 +400,7 @@ public class CompareCarsFragment extends Fragment {
     }
 
     private void getComparisonCars(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/popular_comparisons.php";
+        String url = "http://192.168.1.65:81/android/popular_comparisons.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

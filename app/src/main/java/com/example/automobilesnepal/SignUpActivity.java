@@ -200,7 +200,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void createUser(){
         final String full_name, email, password, final_password;
         boolean error = false;
-        String url = "https://automobiles-nepal.000webhostapp.com/android/create_user.php";
+        String url = "http://192.168.1.65:81/android/create_user.php";
         full_name = edit_text_full_name.getText().toString().trim();
         email = edit_text_email.getText().toString().trim();
         password = edit_text_password.getText().toString().trim();
@@ -251,7 +251,6 @@ public class SignUpActivity extends AppCompatActivity {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     if (response.trim().equals("success")) {
                         Toast.makeText(SignUpActivity.this, "Account successfully created", Toast.LENGTH_SHORT).show();
-
                         finish();
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);

@@ -52,7 +52,7 @@ public class CarAccessoriesFragment extends Fragment {
     }
 
     private void getCarAccessories(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_car_accessories.php";
+        String url = "http://192.168.1.65:81/android/get_car_accessories.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

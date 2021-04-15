@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -65,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login(){
         final String email, password;
         boolean error = false;
-        String url = "https://automobiles-nepal.000webhostapp.com/android/login.php";
+        String url = "http://192.168.1.65:81/android/login.php";
         email = edit_text_email.getText().toString().trim();
         password = edit_text_password.getText().toString().trim();
 
@@ -128,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     Toast.makeText(LoginActivity.this, ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
                 }
-            }) {
+            }){
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();

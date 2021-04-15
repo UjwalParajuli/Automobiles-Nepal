@@ -195,7 +195,7 @@ public class CarsFragment extends Fragment {
     }
 
     private void getBrands(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_car_brands.php";
+        String url = "http://192.168.1.65:81/android/get_car_brands.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -212,7 +212,7 @@ public class CarsFragment extends Fragment {
 
                         for (int i = 0; i < jsonArray.length(); i++){
                             jsonResponse = jsonArray.getJSONObject(i);
-                            int brand_id = jsonResponse.getInt("brand_id");
+                            int brand_id = jsonResponse.getInt("car_brand_id");
                             String brand_name = jsonResponse.getString("brand_name");
                             String brand_logo = jsonResponse.getString("brand_logo");
 
@@ -264,7 +264,7 @@ public class CarsFragment extends Fragment {
     }
 
     private void getNewCars(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_new_cars.php";
+        String url = "http://192.168.1.65:81/android/get_new_cars.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -349,7 +349,7 @@ public class CarsFragment extends Fragment {
     }
 
     private void getUsedCars(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_used_cars.php";
+        String url = "http://192.168.1.65:81/android/get_used_cars.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -428,7 +428,7 @@ public class CarsFragment extends Fragment {
     }
 
     public void addNewItem() {
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_featured_cars.php";
+        String url = "http://192.168.1.65:81/android/get_featured_cars.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

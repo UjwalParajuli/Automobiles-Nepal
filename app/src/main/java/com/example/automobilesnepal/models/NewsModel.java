@@ -3,7 +3,7 @@ package com.example.automobilesnepal.models;
 import java.io.Serializable;
 
 public class NewsModel implements Serializable {
-    private String news_image, news_title, news_content;
+    private String news_image, news_title, news_content, published_date;
 
     public String getNews_image() {
         return news_image;
@@ -29,9 +29,18 @@ public class NewsModel implements Serializable {
         this.news_content = news_content;
     }
 
-    public NewsModel(String news_image, String news_title, String news_content) {
+    public String getPublished_date() {
+        return published_date;
+    }
+
+    public void setPublished_date(String published_date) {
+        this.published_date = published_date;
+    }
+
+    public NewsModel(String news_image, String news_title, String news_content, String published_date) {
         this.news_image = news_image;
         this.news_title = news_title;
         this.news_content = news_content;
+        this.published_date = published_date;
     }
 }

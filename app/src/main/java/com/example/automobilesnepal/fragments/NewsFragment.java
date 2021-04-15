@@ -17,6 +17,7 @@ import com.example.automobilesnepal.adapters.NewsAdapter;
 import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.models.NewsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
+import com.example.automobilesnepal.utils.ItemClickSupport;
 import com.example.automobilesnepal.utils.SpacesItemDecoration;
 import com.example.automobilesnepal.utils.VerticalSpacesItemDecoration;
 
@@ -50,7 +51,7 @@ public class NewsFragment extends Fragment {
     }
 
     private void getNewsData(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_news.php";
+        String url = "http://192.168.1.65:81/android/get_news.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -67,12 +68,15 @@ public class NewsFragment extends Fragment {
 
                         for (int i = 0; i < jsonArray.length(); i++){
                             jsonResponse = jsonArray.getJSONObject(i);
+
+//                            JSONObject users = jsonResponse.getJSONObject("users");
                             int news_id = jsonResponse.getInt("id");
                             String title = jsonResponse.getString("title");
                             String photo = jsonResponse.getString("photo");
                             String description = jsonResponse.getString("description");
+                            String published_date = jsonResponse.getString("published_date");
 
-                            NewsModel newsModel = new NewsModel(photo, title, description);
+                            NewsModel newsModel = new NewsModel(photo, title, description, published_date);
                             newsModelArrayList.add(newsModel);
                         }
 
@@ -82,20 +86,20 @@ public class NewsFragment extends Fragment {
                         recycler_view_latest_news.addItemDecoration(new VerticalSpacesItemDecoration(40));
                         newsAdapter.notifyDataSetChanged();
 
-//                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                                CarsModel car_model = carsModelArrayList.get(position);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putSerializable("brand_cars_list", car_model);
-//                                Fragment brandCarsListFragment = new BrandCarsListFragment();
-//                                brandCarsListFragment.setArguments(bundle);
-//                                getFragmentManager()
-//                                        .beginTransaction()
-//                                        .replace(R.id.fragment_container, brandCarsListFragment)
-//                                        .addToBackStack(null).commit();
-//                            }
-//                        });
+                        ItemClickSupport.addTo(recycler_view_latest_news).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                NewsModel news_model = newsModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("news_details", news_model);
+                                Fragment newsDetailsFragment = new NewsDetailsFragment();
+                                newsDetailsFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, newsDetailsFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
 
 
                     }

@@ -14,15 +14,15 @@ public class ErrorUtils {
 
         String message = "Something is wrong. Please try again!";
         if (error instanceof NetworkError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = "Network Error...Please check your connection!";
         } else if (error instanceof ServerError) {
             message = "The server could not be found. Please try again after some time!!";
         } else if (error instanceof AuthFailureError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = "Authentication Failure Error...Please check your connection!";
         } else if (error instanceof ParseError) {
             message = "Parsing error! Please try again after some time!!";
         } else if (error instanceof NoConnectionError) {
-            message = "Cannot connect to Internet...Please check your connection!";
+            message = "No Connection...Please check your connection!";
         } else if (error instanceof TimeoutError) {
             message = "Connection TimeOut! Please check your internet connection.";
         }

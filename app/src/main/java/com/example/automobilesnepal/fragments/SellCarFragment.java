@@ -156,7 +156,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
     }
 
     private void getBrands(){
-        String url = "https://automobiles-nepal.000webhostapp.com/android/get_car_brands.php";
+        String url = "http://192.168.1.65:81/android/get_car_brands.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -173,7 +173,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
 
                         for (int i = 0; i < jsonArray.length(); i++){
                             jsonResponse = jsonArray.getJSONObject(i);
-                            int brand_id = jsonResponse.getInt("brand_id");
+                            int brand_id = jsonResponse.getInt("car_brand_id");
                             String brand_name = jsonResponse.getString("brand_name");
                             String brand_logo = jsonResponse.getString("brand_logo");
 
@@ -211,7 +211,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
         CarBrandsModel carBrandsModel = (CarBrandsModel) parent.getSelectedItem();
         if (parent.getId() == R.id.spinner_car_brand_list){
             carsModelArrayList.clear();
-            String url = "https://automobiles-nepal.000webhostapp.com/android/get_cars.php";
+            String url = "http://192.168.1.65:81/android/get_cars.php";
 
             final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -292,7 +292,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
     private void uploadCar(){
         String selling_car_image, registered_year, car_color, previous_owners, running_km, selling_location, selling_price;
         boolean error = false;
-        String url = "https://automobiles-nepal.000webhostapp.com/android/upload_car.php";
+        String url = "http://192.168.1.65:81/android/upload_car.php";
 
         selling_car_image = getStringImage(bitmap);
 
