@@ -27,6 +27,8 @@ public class CarsModel implements Serializable {
         this.car_review_video_link = car_review_video_link;
         this.car_color = car_color;
 
+
+
     }
 
     public int getCar_model_id() {
@@ -180,6 +182,7 @@ public class CarsModel implements Serializable {
     public void setCar_color(String car_color) {
         this.car_color = car_color;
     }
+
 
     @Override
     public String toString() {

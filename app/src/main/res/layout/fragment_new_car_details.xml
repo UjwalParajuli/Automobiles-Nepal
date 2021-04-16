@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolbar_fragment_news_details"
+        layout="@layout/toolbar"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/image_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_fragment_news_details"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/image_view_new_car_details"
+            android:layout_width="0dp"
+            android:layout_height="250dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/lamborghini" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view_layout">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="33dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/image_view_not_bookmarked_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@id/text_view_brand_name_new_car_details"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/text_view_brand_name_new_car_details"
+                            app:srcCompat="@drawable/ic_empty_heart" />
+
+                        <TextView
+                            android:id="@+id/text_view_brand_name_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:lineHeight="25dp"
+                            android:text="Brand Name | Model Name"
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="18dp"
+                            app:layout_constraintEnd_toStartOf="@+id/image_view_not_bookmarked_new_car_details"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/text_view_price_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="Price"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textSize="14dp"
+                            android:textColor="@color/button_color"
+                            app:layout_constraintEnd_toStartOf="@+id/image_view_bookmarked_new_car_details"
+                            app:layout_constraintStart_toStartOf="@+id/text_view_brand_name_new_car_details"
+                            app:layout_constraintTop_toBottomOf="@id/text_view_brand_name_new_car_details" />
+
+                        <TextView
+                            android:id="@+id/textView53"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Description"
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="18dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/text_view_price_new_car_details" />
+
+                        <TextView
+                            android:id="@+id/text_view_description_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="TextView"
+                            android:fontFamily="@font/roboto_regular"
+                            android:textSize="14dp"
+                            android:textColor="@color/color_575757"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView53" />
+
+                        <TextView
+                            android:id="@+id/textView54"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Key Specifications"
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="18dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/text_view_description_new_car_details" />
+
+                        <TextView
+                            android:id="@+id/textView55"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Mileage : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+                        <TextView
+                            android:id="@+id/text_view_mileage_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView55"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView55"
+                            app:layout_constraintTop_toTopOf="@id/textView55" />
+
+                        <TextView
+                            android:id="@+id/textView56"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Fuel Type : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+                        <TextView
+                            android:id="@+id/text_view_fuel_type_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView56"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView56"
+                            app:layout_constraintTop_toTopOf="@id/textView56" />
+
+                        <TextView
+                            android:id="@+id/textView57"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Displacement : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+                        <TextView
+                            android:id="@+id/text_view_displacement_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView57"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView57"
+                            app:layout_constraintTop_toTopOf="@id/textView57" />
+
+                        <TextView
+                            android:id="@+id/textView58"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Max Power : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView57" />
+
+                        <TextView
+                            android:id="@+id/text_view_max_power_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView58"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView58"
+                            app:layout_constraintTop_toTopOf="@id/textView58" />
+
+                        <TextView
+                            android:id="@+id/textView59"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Max Torque : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+                        <TextView
+                            android:id="@+id/text_view_max_torque_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView59"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView59"
+                            app:layout_constraintTop_toTopOf="@id/textView59" />
+
+                        <TextView
+                            android:id="@+id/textView60"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Seat Capacity : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+                        <TextView
+                            android:id="@+id/text_view_seat_capacity_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView60"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView60"
+                            app:layout_constraintTop_toTopOf="@id/textView60" />
+
+                        <TextView
+                            android:id="@+id/textView61"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Transmission Type : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView60" />
+
+                        <TextView
+                            android:id="@+id/text_view_transmission_type_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView61"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView61"
+                            app:layout_constraintTop_toTopOf="@id/textView61" />
+
+                        <TextView
+                            android:id="@+id/textView62"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Boot Space : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+                        <TextView
+                            android:id="@+id/text_view_boot_space_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView62"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView62"
+                            app:layout_constraintTop_toTopOf="@id/textView62" />
+
+                        <TextView
+                            android:id="@+id/textView63"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Fuel Capacity : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView62" />
+
+                        <TextView
+                            android:id="@+id/text_view_fuel_capacity_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView63"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView63"
+                            app:layout_constraintTop_toTopOf="@id/textView63" />
+
+                        <TextView
+                            android:id="@+id/textView64"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Body Type : "
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+                        <TextView
+                            android:id="@+id/text_view_body_type_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintBottom_toBottomOf="@id/textView64"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/textView64"
+                            app:layout_constraintTop_toTopOf="@id/textView64" />
+
+                        <TextView
+                            android:id="@+id/textView65"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Available Colors"
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="18dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView64" />
+
+                        <TextView
+                            android:id="@+id/text_view_available_colors_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="TextView"
+                            android:textColor="@color/color_575757"
+                            android:textSize="12dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView65" />
+
+                        <ImageView
+                            android:id="@+id/image_view_bookmarked_new_car_details"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@id/text_view_brand_name_new_car_details"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/text_view_brand_name_new_car_details"
+                            app:srcCompat="@drawable/ic_heart" />
+
+                        <LinearLayout
+                            android:id="@+id/review_video_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/text_view_available_colors_new_car_details">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/textView66"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/coco_gothic_bold"
+                                    android:text="Review Video"
+                                    android:textColor="@color/login_credentials_heading"
+                                    android:textSize="18dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                    android:id="@+id/youtube_player_view"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    app:autoPlay="false"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/textView66"
+                                    app:showFullScreenButton="false"
+                                    />
+
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </LinearLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
