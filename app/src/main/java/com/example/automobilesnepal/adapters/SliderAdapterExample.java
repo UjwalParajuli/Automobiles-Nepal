@@ -2,6 +2,7 @@ package com.example.automobilesnepal.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,14 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.automobilesnepal.R;
+import com.example.automobilesnepal.fragments.NewCarDetailsFragment;
 import com.example.automobilesnepal.models.CarsModel;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 public class SliderAdapterExample extends
         SliderViewAdapter<SliderAdapterExample.SliderAdapterVH> {
@@ -65,7 +70,14 @@ public class SliderAdapterExample extends
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("new_car_details", sliderItem);
+                Fragment newCarDetailsFragment = new NewCarDetailsFragment();
+                newCarDetailsFragment.setArguments(bundle);
+                ((AppCompatActivity)context).getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, newCarDetailsFragment)
+                        .addToBackStack(null).commit();
             }
         });
     }

@@ -462,8 +462,8 @@ public class CarsFragment extends Fragment {
                             String image = jsonResponse.getString("image");
                             String price = jsonResponse.getString("price");
                             String description = jsonResponse.getString("description");
-                            String video_link = "na";
-                            String car_color = "na";
+                            String video_link = jsonResponse.getString("car_review_video_link");
+                            String car_color = jsonResponse.getString("new_car_color");
 
                             CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
                             adapter.addItem(carsModel);

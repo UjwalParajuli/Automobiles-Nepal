@@ -44,7 +44,7 @@ public class AccessoryAdapter extends RecyclerView.Adapter<AccessoryAdapter.View
         TextView accessory_price = holder.accessory_price;
         ImageView accessory_image = holder.accessory_image;
 
-        Glide.with(context).load(accessoriesModel.getImage()).into(holder.accessory_image);
+        Glide.with(context).load(accessoriesModel.getImage()).into(accessory_image);
         accessory_name.setText(accessoriesModel.getTitle());
         accessory_price.setText("Rs " + accessoriesModel.getAccessory_price());
 //        Resources res = context.getResources();

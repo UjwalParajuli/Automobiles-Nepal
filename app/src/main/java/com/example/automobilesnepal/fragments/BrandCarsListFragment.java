@@ -102,8 +102,8 @@ public class BrandCarsListFragment extends Fragment {
                             String image = jsonResponse.getString("image");
                             String price = jsonResponse.getString("price");
                             String description = jsonResponse.getString("description");
-                            String video_link = "na";
-                            String car_color = "na";
+                            String video_link = jsonResponse.getString("car_review_video_link");
+                            String car_color = jsonResponse.getString("new_car_color");
 
                             CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
                             carsModelArrayList.add(carsModel);
@@ -120,20 +120,20 @@ public class BrandCarsListFragment extends Fragment {
                         recycler_view_brand_cars_list.setAdapter(carsAdapter);
                         carsAdapter.notifyDataSetChanged();
 
-//                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                                CarsModel car_model = carsModelArrayList.get(position);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putSerializable("brand_cars_list", car_model);
-//                                Fragment brandCarsListFragment = new BrandCarsListFragment();
-//                                brandCarsListFragment.setArguments(bundle);
-//                                getFragmentManager()
-//                                        .beginTransaction()
-//                                        .replace(R.id.fragment_container, brandCarsListFragment)
-//                                        .addToBackStack(null).commit();
-//                            }
-//                        });
+                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                CarsModel car_model = carsModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("new_car_details", car_model);
+                                Fragment newCarDetailsFragment = new NewCarDetailsFragment();
+                                newCarDetailsFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, newCarDetailsFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
 
 
                     }

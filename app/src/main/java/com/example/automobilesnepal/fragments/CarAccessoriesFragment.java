@@ -93,20 +93,20 @@ public class CarAccessoriesFragment extends Fragment {
                         recycler_view_all_car_accessories.setAdapter(accessoryAdapter);
                         accessoryAdapter.notifyDataSetChanged();
 
-//                        ItemClickSupport.addTo(recycler_view_all_car_accessories).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                                CarBrandsModel car_brands_model = carBrandsModelArrayList.get(position);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putSerializable("brand_cars_list", car_brands_model);
-//                                Fragment brandCarsListFragment = new BrandCarsListFragment();
-//                                brandCarsListFragment.setArguments(bundle);
-//                                getFragmentManager()
-//                                        .beginTransaction()
-//                                        .replace(R.id.fragment_container, brandCarsListFragment)
-//                                        .addToBackStack(null).commit();
-//                            }
-//                        });
+                        ItemClickSupport.addTo(recycler_view_all_car_accessories).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                AccessoriesModel accessoriesModel = accessoriesModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("accessory_details", accessoriesModel);
+                                Fragment carAccessoryDetailsFragment = new CarAccessoryDetailsFragment();
+                                carAccessoryDetailsFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, carAccessoryDetailsFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
 
 
                     }
