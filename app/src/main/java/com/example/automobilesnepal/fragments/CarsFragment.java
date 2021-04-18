@@ -379,8 +379,9 @@ public class CarsFragment extends Fragment {
                             String selling_location = jsonResponse.getString("selling_location");
                             String used_car_photo = jsonResponse.getString("used_car_photo");
                             String posted_date = jsonResponse.getString("posted_date");
+                            String brand_name = jsonResponse.getString("brand_name");
 
-                            UsedCarsModel usedCarsModel = new UsedCarsModel(used_car_id, car_model_id, posted_by, no_of_previous_owner, total_kilometers, selling_price, registered_year, used_car_color, is_verified, selling_location, used_car_photo, posted_date, model_name);
+                            UsedCarsModel usedCarsModel = new UsedCarsModel(used_car_id, car_model_id, posted_by, no_of_previous_owner, total_kilometers, selling_price, registered_year, used_car_color, is_verified, selling_location, used_car_photo, posted_date, model_name, brand_name);
                             usedCarsModelArrayList.add(usedCarsModel);
                         }
 
@@ -390,20 +391,20 @@ public class CarsFragment extends Fragment {
                         recycler_view_used_cars.addItemDecoration(new SpacesItemDecoration(20));
                         usedCarsAdapter.notifyDataSetChanged();
 
-//                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
-//                            @Override
-//                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-//                                CarsModel car_model = carsModelArrayList.get(position);
-//                                Bundle bundle = new Bundle();
-//                                bundle.putSerializable("brand_cars_list", car_model);
-//                                Fragment brandCarsListFragment = new BrandCarsListFragment();
-//                                brandCarsListFragment.setArguments(bundle);
-//                                getFragmentManager()
-//                                        .beginTransaction()
-//                                        .replace(R.id.fragment_container, brandCarsListFragment)
-//                                        .addToBackStack(null).commit();
-//                            }
-//                        });
+                        ItemClickSupport.addTo(recycler_view_used_cars).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                UsedCarsModel usedCarsModel = usedCarsModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("used_car_details", usedCarsModel);
+                                Fragment usedCarDetailsFragment = new UsedCarDetailsFragment();
+                                usedCarDetailsFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, usedCarDetailsFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
 
 
                     }

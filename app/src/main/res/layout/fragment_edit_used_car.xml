@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include_toolbar_edit_car_fragment"
+        layout="@layout/toolbar"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_below="@id/include_toolbar_edit_car_fragment"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linerar_layout_car_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginEnd="33dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <Button
+                            android:id="@+id/button_update_car"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="27dp"
+                            android:background="@drawable/button_background"
+                            android:fontFamily="@font/coco_gothic_regular"
+                            android:text="Update Car"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="18dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/image_view_edit_upload_sell_car" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_car_color"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:inputType="textPersonName"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView26" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_car_previous_owners"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView27" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_car_total_kilometers"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView28" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_car_selling_price"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:hint="NPR"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView31" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_car_selling_location"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="textPersonName"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView29" />
+
+                        <ImageView
+                            android:id="@+id/image_view_edit_upload_sell_car"
+                            android:layout_width="0dp"
+                            android:layout_height="216dp"
+                            android:layout_marginTop="4dp"
+                            android:scaleType="fitXY"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView30"
+                            app:srcCompat="@drawable/add_image" />
+
+                        <Spinner
+                            android:id="@+id/spinner_edit_car_brand_list"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:background="@drawable/edit_text_background"
+                            android:spinnerMode="dropdown"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView23" />
+
+                        <Spinner
+                            android:id="@+id/spinner_edit_car_model_list"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:spinnerMode="dropdown"
+                            android:background="@drawable/edit_text_background"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView24" />
+
+                        <Spinner
+                            android:id="@+id/spinner_edit_car_registered_year"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:spinnerMode="dropdown"
+                            android:background="@drawable/edit_text_background"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView25" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Car Information"
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="18dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Select Car Brand"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView" />
+
+                        <TextView
+                            android:id="@+id/textView24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Select Car Model"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_edit_car_brand_list" />
+
+                        <TextView
+                            android:id="@+id/textView25"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Registered Year"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_edit_car_model_list" />
+
+                        <TextView
+                            android:id="@+id/textView26"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Car Color"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_edit_car_registered_year" />
+
+                        <TextView
+                            android:id="@+id/textView27"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="No of previous owners"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_car_color" />
+
+                        <TextView
+                            android:id="@+id/textView28"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Running Kilometers"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_car_previous_owners" />
+
+                        <TextView
+                            android:id="@+id/textView31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Selling Price"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_car_total_kilometers" />
+
+                        <TextView
+                            android:id="@+id/textView29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Selling Location"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_car_selling_price" />
+
+                        <TextView
+                            android:id="@+id/textView30"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Upload Image"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_car_selling_location" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_bar_edit_car"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="invisible"
+                            android:indeterminate="true"
+                            android:indeterminateTintMode="src_atop"
+                            android:indeterminateTint="@color/button_color"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

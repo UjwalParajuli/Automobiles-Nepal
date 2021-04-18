@@ -5,9 +5,9 @@ import java.io.Serializable;
 public class UsedCarsModel implements Serializable {
     private int used_car_id, car_model_id, posted_by, no_of_previous_owners, total_kilometers;
     private Double selling_car_price;
-    private String registered_year, used_car_color, is_verified, selling_location, used_car_photo, posted_date, car_model_name;
+    private String registered_year, used_car_color, is_verified, selling_location, used_car_photo, posted_date, car_model_name, brand_name;
 
-    public UsedCarsModel(int used_car_id, int car_model_id, int posted_by, int no_of_previous_owners, int total_kilometers, Double selling_car_price, String registered_year, String used_car_color, String is_verified, String selling_location, String used_car_photo, String posted_date, String car_model_name) {
+    public UsedCarsModel(int used_car_id, int car_model_id, int posted_by, int no_of_previous_owners, int total_kilometers, Double selling_car_price, String registered_year, String used_car_color, String is_verified, String selling_location, String used_car_photo, String posted_date, String car_model_name, String brand_name) {
         this.used_car_id = used_car_id;
         this.car_model_id = car_model_id;
         this.posted_by = posted_by;
@@ -21,6 +21,7 @@ public class UsedCarsModel implements Serializable {
         this.used_car_photo = used_car_photo;
         this.posted_date = posted_date;
         this.car_model_name = car_model_name;
+        this.brand_name = brand_name;
     }
 
     public int getUsed_car_id() {
@@ -125,5 +126,13 @@ public class UsedCarsModel implements Serializable {
 
     public void setCar_model_name(String car_model_name) {
         this.car_model_name = car_model_name;
+    }
+
+    public String getBrand_name() {
+        return brand_name;
+    }
+
+    public void setBrand_name(String brand_name) {
+        this.brand_name = brand_name;
     }
 }

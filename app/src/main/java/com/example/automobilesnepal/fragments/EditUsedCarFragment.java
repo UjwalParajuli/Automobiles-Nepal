@@ -4,9 +4,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -29,14 +31,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.automobilesnepal.LoginActivity;
-import com.example.automobilesnepal.MainActivity;
+import com.bumptech.glide.Glide;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.models.CarBrandsModel;
 import com.example.automobilesnepal.models.CarsModel;
+import com.example.automobilesnepal.models.UsedCarsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
-import com.example.automobilesnepal.utils.GridSpacingItemDecoration;
-import com.example.automobilesnepal.utils.ItemClickSupport;
 import com.example.automobilesnepal.utils.SharedPrefManager;
 import com.example.automobilesnepal.utils.User;
 
@@ -46,6 +46,9 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -57,26 +60,28 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import static android.app.Activity.RESULT_OK;
 
-public class SellCarFragment extends Fragment implements AdapterView.OnItemSelectedListener {
-    private Spinner spinner_brand, spinner_model, spinner_year;
+public class EditUsedCarFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+    private Bundle bundle;
+    private UsedCarsModel usedCarsModel;
+    private User user;
+    private EditText edit_text_edit_car_color, edit_text_edit_car_previous_owners, edit_text_edit_car_total_kilometers, edit_text_edit_car_selling_price,
+            edit_text_edit_car_selling_location;
+    private ImageView image_view_edit_upload_sell_car;
+    private Spinner spinner_edit_car_brand_list, spinner_edit_car_model_list, spinner_edit_car_registered_year;
+    private Button button_update_car;
+    private ProgressBar progress_bar_edit_car;
     private ArrayList<CarBrandsModel> carBrandsModelArrayList;
     private ArrayList<CarsModel> carsModelArrayList;
     private ArrayList<String> years;
     private ArrayAdapter<CarBrandsModel> carBrandsModelArrayAdapter;
     private ArrayAdapter<CarsModel> carsModelArrayAdapter;
     private ArrayAdapter<String> yearsAdapter;
-    private EditText edit_text_car_color, edit_text_running_km, edit_text_previous_owners, edit_text_selling_location, edit_text_car_selling_price;
     private int car_model_id;
-    private Button button_upload_car;
     private Bitmap bitmap;
-    private ImageView image_view_selling_car_image;
-    private User user;
-    private ProgressBar progress_bar_sell_car;
+    Bitmap bitmap1;
 
     private static final int PERMISSION_REQUEST = 1;
     private static final int IMAGE_REQUEST = 2;
@@ -84,38 +89,37 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_sell_car, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_used_car, container, false);
 
+        bundle = getArguments();
         user = SharedPrefManager.getInstance(getContext()).getUser();
-        button_upload_car = view.findViewById(R.id.button_upload_car);
-        progress_bar_sell_car = view.findViewById(R.id.progress_bar_sell_car);
+        usedCarsModel = (UsedCarsModel) bundle.getSerializable("used_car_details");
 
-        edit_text_car_color = view.findViewById(R.id.edit_text_car_color);
-        edit_text_running_km = view.findViewById(R.id.edit_text_car_total_kilometers);
-        edit_text_previous_owners = view.findViewById(R.id.edit_text_car_previous_owners);
-        edit_text_selling_location = view.findViewById(R.id.edit_text_car_selling_location);
-        edit_text_car_selling_price = view.findViewById(R.id.edit_text_car_selling_price);
-
-        image_view_selling_car_image = view.findViewById(R.id.image_view_upload_sell_car);
-
-        spinner_brand = view.findViewById(R.id.spinner_car_brand_list);
-        spinner_model = view.findViewById(R.id.spinner_car_model_list);
-        spinner_year = view.findViewById(R.id.spinner_car_registered_year);
+        edit_text_edit_car_color = view.findViewById(R.id.edit_text_edit_car_color);
+        edit_text_edit_car_previous_owners = view.findViewById(R.id.edit_text_edit_car_previous_owners);
+        edit_text_edit_car_total_kilometers = view.findViewById(R.id.edit_text_edit_car_total_kilometers);
+        edit_text_edit_car_selling_price = view.findViewById(R.id.edit_text_edit_car_selling_price);
+        edit_text_edit_car_selling_location = view.findViewById(R.id.edit_text_edit_car_selling_location);
+        image_view_edit_upload_sell_car = view.findViewById(R.id.image_view_edit_upload_sell_car);
+        spinner_edit_car_brand_list = view.findViewById(R.id.spinner_edit_car_brand_list);
+        spinner_edit_car_model_list = view.findViewById(R.id.spinner_edit_car_model_list);
+        spinner_edit_car_registered_year = view.findViewById(R.id.spinner_edit_car_registered_year);
+        button_update_car = view.findViewById(R.id.button_update_car);
+        progress_bar_edit_car = view.findViewById(R.id.progress_bar_edit_car);
 
         carBrandsModelArrayList = new ArrayList<>();
         carsModelArrayList = new ArrayList<>();
-        getBrands();
-
         years = new ArrayList<>();
+
         int thisYear = Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 1900; i <= thisYear; i++) {
             years.add(Integer.toString(i));
         }
         yearsAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, years);
         yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner_year.setAdapter(yearsAdapter);
+        spinner_edit_car_registered_year.setAdapter(yearsAdapter);
 
-        spinner_model.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_edit_car_model_list.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 CarsModel carBrandsModel = (CarsModel) parent.getSelectedItem();
@@ -128,29 +132,48 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
             }
         });
 
-        button_upload_car.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                uploadCar();
-            }
-        });
+        getBrands();
+        setData();
 
-        image_view_selling_car_image.setOnClickListener(new View.OnClickListener() {
+        image_view_edit_upload_sell_car.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 displayFileChoose();
             }
         });
 
-        if (checkPermission()){
+        if (Build.VERSION.SDK_INT >= 23){
+            if (checkPermission()){
 
-        }
-        else {
-            requestPermission();
+            }
+            else {
+                requestPermission();
+            }
         }
 
+        button_update_car.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateData();
+            }
+        });
 
         return view;
+    }
+
+    private void setData(){
+        Glide.with(getContext()).load(usedCarsModel.getUsed_car_photo()).into(image_view_edit_upload_sell_car);
+
+        int spinnerPosition = yearsAdapter.getPosition(usedCarsModel.getRegistered_year());
+        spinner_edit_car_registered_year.setSelection(spinnerPosition);
+        yearsAdapter.notifyDataSetChanged();
+
+        edit_text_edit_car_color.setText(usedCarsModel.getUsed_car_color());
+        edit_text_edit_car_previous_owners.setText(String.valueOf(usedCarsModel.getNo_of_previous_owners()));
+        edit_text_edit_car_selling_location.setText(usedCarsModel.getSelling_location());
+        edit_text_edit_car_total_kilometers.setText(String.valueOf(usedCarsModel.getTotal_kilometers()));
+        edit_text_edit_car_selling_price.setText(String.valueOf(usedCarsModel.getSelling_car_price()));
+
     }
 
     private void getBrands(){
@@ -179,7 +202,17 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
                             carBrandsModelArrayList.add(carBrandsModel);
                             carBrandsModelArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, carBrandsModelArrayList);
                             carBrandsModelArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            spinner_brand.setAdapter(carBrandsModelArrayAdapter);
+                            spinner_edit_car_brand_list.setAdapter(carBrandsModelArrayAdapter);
+                        }
+
+                        String strCompare = usedCarsModel.getBrand_name();
+
+                        for(int i = 0; i < spinner_edit_car_brand_list.getCount(); i++) {
+                            if (spinner_edit_car_brand_list.getItemAtPosition(i).toString().equals(strCompare)) {
+                                spinner_edit_car_brand_list.setSelection(i);
+                                carBrandsModelArrayAdapter.notifyDataSetChanged();
+                                break;
+                            }
                         }
 
 
@@ -201,13 +234,13 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
 
         };
         requestQueue.add(stringRequest);
-        spinner_brand.setOnItemSelectedListener(this);
+        spinner_edit_car_brand_list.setOnItemSelectedListener(this);
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         CarBrandsModel carBrandsModel = (CarBrandsModel) parent.getSelectedItem();
-        if (parent.getId() == R.id.spinner_car_brand_list){
+        if (parent.getId() == R.id.spinner_edit_car_brand_list){
             carsModelArrayList.clear();
             String url = "http://192.168.1.65:81/android/get_cars.php";
 
@@ -244,14 +277,24 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
                                 String image = jsonResponse.getString("image");
                                 String price = jsonResponse.getString("price");
                                 String description = jsonResponse.getString("description");
-                                String video_link = jsonResponse.getString("car_review_video_link");
-                                String car_color = jsonResponse.getString("new_car_color");
+                                String video_link = "na";
+                                String car_color = "na";
 
                                 CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
                                 carsModelArrayList.add(carsModel);
                                 carsModelArrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, carsModelArrayList);
                                 carsModelArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                spinner_model.setAdapter(carsModelArrayAdapter);
+                                spinner_edit_car_model_list.setAdapter(carsModelArrayAdapter);
+                            }
+
+                            String strCompare = usedCarsModel.getCar_model_name();
+
+                            for(int i = 0; i < spinner_edit_car_model_list.getCount(); i++) {
+                                if (spinner_edit_car_model_list.getItemAtPosition(i).toString().equals(strCompare)) {
+                                    spinner_edit_car_model_list.setSelection(i);
+                                    carsModelArrayAdapter.notifyDataSetChanged();
+                                    break;
+                                }
                             }
 
 
@@ -288,19 +331,31 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
 
     }
 
-    private void uploadCar(){
+    private void updateData(){
         String selling_car_image, registered_year, car_color, previous_owners, running_km, selling_location, selling_price;
         boolean error = false;
-        String url = "http://192.168.1.65:81/android/upload_car.php";
+        String url = "http://192.168.1.65:81/android/update_car.php";
 
-        selling_car_image = getStringImage(bitmap);
+        String image1 = null;
+        String imageUrl = usedCarsModel.getUsed_car_photo();
+        try {
+            int check = bitmap.getWidth();
+            image1 = getStringImage(bitmap);
+        }catch (Exception ex){
+            bitmap1 = getBitmapFromURL(imageUrl);
+            image1 = getStringImage(bitmap1);
+        }
 
-        registered_year = spinner_year.getSelectedItem().toString().trim();
-        car_color = edit_text_car_color.getText().toString().trim();
-        previous_owners = edit_text_previous_owners.getText().toString().trim();
-        running_km = edit_text_running_km.getText().toString().trim();
-        selling_location = edit_text_selling_location.getText().toString().trim();
-        selling_price = edit_text_car_selling_price.getText().toString().trim();
+        Toast.makeText(getContext(), usedCarsModel.getUsed_car_photo(), Toast.LENGTH_SHORT).show();
+
+        selling_car_image = image1;
+
+        registered_year = spinner_edit_car_registered_year.getSelectedItem().toString().trim();
+        car_color = edit_text_edit_car_color.getText().toString().trim();
+        previous_owners = edit_text_edit_car_previous_owners.getText().toString().trim();
+        running_km = edit_text_edit_car_total_kilometers.getText().toString().trim();
+        selling_location = edit_text_edit_car_selling_location.getText().toString().trim();
+        selling_price = edit_text_edit_car_selling_price.getText().toString().trim();
 
         if (selling_car_image.isEmpty()){
             Toast.makeText(getContext(), "Please Choose Image", Toast.LENGTH_SHORT).show();
@@ -308,47 +363,47 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
         }
 
         if (car_color.isEmpty()){
-            edit_text_car_color.setError("Please insert car color");
+            edit_text_edit_car_color.setError("Please insert car color");
             error = true;
         }
 
         if (previous_owners.isEmpty()){
-            edit_text_previous_owners.setError("Please insert number of previous owners");
+            edit_text_edit_car_previous_owners.setError("Please insert number of previous owners");
             error = true;
         }
 
         if (running_km.isEmpty()){
-            edit_text_running_km.setError("Please insert total running kilometers");
+            edit_text_edit_car_total_kilometers.setError("Please insert total running kilometers");
             error = true;
         }
 
         if (selling_location.isEmpty()){
-            edit_text_selling_location.setError("Please insert selling location");
+            edit_text_edit_car_selling_location.setError("Please insert selling location");
             error = true;
         }
 
         if (selling_price.isEmpty()){
-            edit_text_car_selling_price.setError("Please insert selling price");
+            edit_text_edit_car_selling_price.setError("Please insert selling price");
             error = true;
         }
 
         if (!car_color.matches("[a-zA-Z\\s]+")){
-            edit_text_car_color.setError("Invalid Color Name");
+            edit_text_edit_car_color.setError("Invalid Color Name");
             error = true;
         }
 
         if (!error){
-            progress_bar_sell_car.setVisibility(View.VISIBLE);
+            progress_bar_edit_car.setVisibility(View.VISIBLE);
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
             StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    progress_bar_sell_car.setVisibility(View.GONE);
+                    progress_bar_edit_car.setVisibility(View.GONE);
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     if (response.trim().equals("success")) {
-                        Toast.makeText(getContext(), "Successfully Posted", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Successfully Updated", Toast.LENGTH_SHORT).show();
                         FragmentManager manager = getActivity().getSupportFragmentManager();
                         manager.beginTransaction().replace(R.id.fragment_container, new CarsFragment()).addToBackStack(null).commit();
                     } else if (response.trim().equals("photo_error")) {
@@ -361,7 +416,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    progress_bar_sell_car.setVisibility(View.GONE);
+                    progress_bar_edit_car.setVisibility(View.GONE);
                     getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     Toast.makeText(getContext(), ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
                 }
@@ -378,6 +433,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
                     params.put("selling_car_image", selling_car_image);
                     params.put("selling_car_price", selling_price);
                     params.put("user_id", String.valueOf(user.getId()));
+                    params.put("used_car_id", String.valueOf(usedCarsModel.getUsed_car_id()));
                     return params;
                 }
             };
@@ -386,6 +442,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
         }
 
     }
+
 
     private void requestPermission(){
         if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE)){
@@ -434,7 +491,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
             Uri imgPath = data.getData();
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), imgPath);
-                image_view_selling_car_image.setImageBitmap(bitmap);
+                image_view_edit_upload_sell_car.setImageBitmap(bitmap);
             }
             catch (IOException e){
                 e.printStackTrace();
@@ -452,5 +509,22 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
         byte[] b = baos.toByteArray();
         return Base64.encodeToString(b, Base64.DEFAULT);
 
+    }
+
+    public static Bitmap getBitmapFromURL(String src) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
     }
 }
