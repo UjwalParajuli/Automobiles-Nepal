@@ -67,7 +67,7 @@ public class CarsFragment extends Fragment {
     private TextView text_view_view_all_brands;
     private TextView text_view_view_all_new_cars;
     private TextView text_view_view_all_used_cars;
-    private ImageButton imageButton;
+    private ImageButton image_button_bar, image_button_heart;
     private SearchView searchView;
 
     @Nullable
@@ -75,7 +75,8 @@ public class CarsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cars, container, false);
 
-        imageButton = view.findViewById(R.id.image_button_bar);
+        image_button_bar = view.findViewById(R.id.image_button_bar);
+        image_button_heart = view.findViewById(R.id.image_button_heart);
         searchView = view.findViewById(R.id.search_view);
 
         sliderView = view.findViewById(R.id.image_slider_cars);
@@ -163,7 +164,7 @@ public class CarsFragment extends Fragment {
             }
         });
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        image_button_bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Clicked on cars fragment", Toast.LENGTH_SHORT).show();

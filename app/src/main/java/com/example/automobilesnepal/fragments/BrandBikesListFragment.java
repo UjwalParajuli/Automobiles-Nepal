@@ -17,7 +17,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.automobilesnepal.R;
+import com.example.automobilesnepal.adapters.BikesAdapter;
 import com.example.automobilesnepal.adapters.CarsAdapter;
+import com.example.automobilesnepal.models.BikeBrandsModel;
+import com.example.automobilesnepal.models.BikesModel;
 import com.example.automobilesnepal.models.CarBrandsModel;
 import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
@@ -38,44 +41,45 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class BrandCarsListFragment extends Fragment {
-    private RecyclerView recycler_view_brand_cars_list;
+public class BrandBikesListFragment extends Fragment {
+    private RecyclerView recycler_view_brand_bikes_list;
     private Bundle bundle;
-    private CarBrandsModel carBrandsModel;
+    private BikeBrandsModel bikeBrandsModel;
     private TextView text_view_brand_name;
     private ImageView image_view_brand_logo;
-    private ArrayList<CarsModel> carsModelArrayList;
-    private CarsAdapter carsAdapter;
+    private ArrayList<BikesModel> bikesModelArrayList;
+    private BikesAdapter bikesAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_brand_cars_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_brand_bikes_list, container, false);
 
         bundle = getArguments();
-        carBrandsModel = (CarBrandsModel) bundle.getSerializable("brand_cars_list");
-        recycler_view_brand_cars_list = view.findViewById(R.id.recycler_view_fragment_brand_cars_list);
-        text_view_brand_name = view.findViewById(R.id.text_view_fragment_brand_cars_list);
-        image_view_brand_logo = view.findViewById(R.id.image_view_fragment_brand_cars_list_logo);
-        carsModelArrayList = new ArrayList<>();
-        carsAdapter = new CarsAdapter(carsModelArrayList, getContext());
+        bikeBrandsModel = (BikeBrandsModel) bundle.getSerializable("brand_bikes_list");
+        recycler_view_brand_bikes_list = view.findViewById(R.id.recycler_view_fragment_brand_bikes_list);
+        text_view_brand_name = view.findViewById(R.id.text_view_fragment_brand_bikes_list);
+        image_view_brand_logo = view.findViewById(R.id.image_view_fragment_brand_bikes_list_logo);
+        bikesModelArrayList = new ArrayList<>();
+        bikesAdapter = new BikesAdapter(bikesModelArrayList, getContext());
 
-        text_view_brand_name.setText(carBrandsModel.getBrand_name());
-        Glide.with(getContext()).load(carBrandsModel.getBrand_logo()).into(image_view_brand_logo);
+        text_view_brand_name.setText(bikeBrandsModel.getBrand_name());
+        Glide.with(getContext()).load(bikeBrandsModel.getBrand_logo()).into(image_view_brand_logo);
 
         getCars();
+
         return view;
     }
 
     private void getCars(){
-        String url = "http://192.168.1.65:81/android/get_brand_cars.php";
+        String url = "http://192.168.1.65:81/android/get_brand_bikes.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.trim().equals("not_found")) {
-                    Toast.makeText(getContext(), "No any cars found", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "No any bikes found", Toast.LENGTH_SHORT).show();
 
                 }
                 else{
@@ -85,52 +89,53 @@ public class BrandCarsListFragment extends Fragment {
 
                         for (int i = 0; i < jsonArray.length(); i++){
                             jsonResponse = jsonArray.getJSONObject(i);
-                            int car_model_id = jsonResponse.getInt("car_model_id");
+                            int bike_model_id = jsonResponse.getInt("bike_model_id");
+                            int bike_brands_id = jsonResponse.getInt("bike_brands_id");
                             String model_name = jsonResponse.getString("model_name");
                             String brand_name = jsonResponse.getString("brand_name");
                             String brand_logo = jsonResponse.getString("brand_logo");
                             String mileage = jsonResponse.getString("mileage");
-                            String fuel_type = jsonResponse.getString("fuel_type");
                             String displacement = jsonResponse.getString("displacement");
+                            String front_brake = jsonResponse.getString("front_brake");
+                            String rear_brake = jsonResponse.getString("rear_brake");
                             String max_power = jsonResponse.getString("max_power");
                             String max_torque = jsonResponse.getString("max_torque");
-                            String seat_capacity = jsonResponse.getString("seat_capacity");
-                            String transmission_type = jsonResponse.getString("transmission_type");
-                            String boot_space = jsonResponse.getString("boot_space");
+                            String engine_type = jsonResponse.getString("engine_type");
+                            String no_of_cylinders = jsonResponse.getString("no_of_cylinders");
                             String fuel_capacity = jsonResponse.getString("fuel_capacity");
                             String body_type = jsonResponse.getString("body_type");
-                            String image = jsonResponse.getString("image");
+                            String bike_photo = jsonResponse.getString("bike_photo");
                             String price = jsonResponse.getString("price");
                             String description = jsonResponse.getString("description");
-                            String video_link = jsonResponse.getString("car_review_video_link");
-                            String car_color = jsonResponse.getString("new_car_color");
+                            String video_link = jsonResponse.getString("bike_review_video_link");
+                            String bike_color = jsonResponse.getString("new_bike_color");
 
-                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
-                            carsModelArrayList.add(carsModel);
+                            BikesModel bikesModel = new BikesModel(bike_model_id, bike_brands_id, model_name, mileage, displacement, engine_type, no_of_cylinders, max_power, max_torque, front_brake, rear_brake, fuel_capacity, body_type, price, description, bike_photo, brand_logo, brand_name, video_link, bike_color);
+                            bikesModelArrayList.add(bikesModel);
                         }
 
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-                        recycler_view_brand_cars_list.setLayoutManager(gridLayoutManager);
+                        recycler_view_brand_bikes_list.setLayoutManager(gridLayoutManager);
 
                         // Grid item spacing
                         int spanCount = 2; // 3 columns
                         int spacing = 50; // 50px
                         boolean includeEdge = false;
-                        recycler_view_brand_cars_list.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
-                        recycler_view_brand_cars_list.setAdapter(carsAdapter);
-                        carsAdapter.notifyDataSetChanged();
+                        recycler_view_brand_bikes_list.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+                        recycler_view_brand_bikes_list.setAdapter(bikesAdapter);
+                        bikesAdapter.notifyDataSetChanged();
 
-                        ItemClickSupport.addTo(recycler_view_brand_cars_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                        ItemClickSupport.addTo(recycler_view_brand_bikes_list).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                             @Override
                             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-                                CarsModel car_model = carsModelArrayList.get(position);
+                                BikesModel bike_model = bikesModelArrayList.get(position);
                                 Bundle bundle = new Bundle();
-                                bundle.putSerializable("new_car_details", car_model);
-                                Fragment newCarDetailsFragment = new NewCarDetailsFragment();
-                                newCarDetailsFragment.setArguments(bundle);
+                                bundle.putSerializable("new_bike_details", bike_model);
+                                Fragment newBikeDetailsFragment = new NewBikeDetailsFragment();
+                                newBikeDetailsFragment.setArguments(bundle);
                                 getFragmentManager()
                                         .beginTransaction()
-                                        .replace(R.id.fragment_container, newCarDetailsFragment)
+                                        .replace(R.id.fragment_container, newBikeDetailsFragment)
                                         .addToBackStack(null).commit();
                             }
                         });
@@ -153,7 +158,7 @@ public class BrandCarsListFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("brand_id", String.valueOf(carBrandsModel.getBrand_id()));
+                params.put("brand_id", String.valueOf(bikeBrandsModel.getBike_brand_id()));
                 return params;
             }
 
@@ -161,6 +166,4 @@ public class BrandCarsListFragment extends Fragment {
         requestQueue.add(stringRequest);
 
     }
-
-
 }

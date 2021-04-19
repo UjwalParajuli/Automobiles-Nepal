@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include_toolbar_edit_bike_fragment"
+        layout="@layout/toolbar"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_below="@id/include_toolbar_edit_bike_fragment"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/linerar_layout_car_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="33dp"
+                    android:layout_marginEnd="33dp"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+
+                        <Button
+                            android:id="@+id/button_update_bike"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="27dp"
+                            android:background="@drawable/button_background"
+                            android:fontFamily="@font/coco_gothic_regular"
+                            android:text="Update Bike"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="18dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/image_view_edit_upload_sell_bike" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_bike_color"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:inputType="textPersonName"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView108" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_bike_previous_owners"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView109" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_bike_total_kilometers"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView110" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_bike_selling_price"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:hint="NPR"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="number"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView111" />
+
+                        <EditText
+                            android:id="@+id/edit_text_edit_bike_selling_location"
+                            android:layout_width="0dp"
+                            android:layout_height="41dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@drawable/edit_text_background"
+                            android:ems="10"
+                            android:paddingStart="17dp"
+                            android:paddingEnd="17dp"
+                            android:inputType="textPersonName"
+                            android:padding="5dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView112" />
+
+                        <ImageView
+                            android:id="@+id/image_view_edit_upload_sell_bike"
+                            android:layout_width="0dp"
+                            android:layout_height="216dp"
+                            android:layout_marginTop="4dp"
+                            android:scaleType="fitXY"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView113"
+                            app:srcCompat="@drawable/add_image" />
+
+                        <Spinner
+                            android:id="@+id/spinner_edit_bike_brand_list"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:background="@drawable/edit_text_background"
+                            android:spinnerMode="dropdown"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView105" />
+
+                        <Spinner
+                            android:id="@+id/spinner_edit_bike_model_list"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:spinnerMode="dropdown"
+                            android:background="@drawable/edit_text_background"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView106" />
+
+                        <Spinner
+                            android:id="@+id/spinner_edit_bike_registered_year"
+                            style="@style/Widget.AppCompat.DropDownItem.Spinner"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="4dp"
+                            android:spinnerMode="dropdown"
+                            android:background="@drawable/edit_text_background"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView107" />
+
+                        <TextView
+                            android:id="@+id/textView104"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/coco_gothic_bold"
+                            android:text="Bike Information"
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="18dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textView105"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Select Bike Brand"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/textView104" />
+
+                        <TextView
+                            android:id="@+id/textView106"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Select Bike Model"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_edit_bike_brand_list" />
+
+                        <TextView
+                            android:id="@+id/textView107"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Registered Year"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_edit_bike_model_list" />
+
+                        <TextView
+                            android:id="@+id/textView108"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Bike Color"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/spinner_edit_bike_registered_year" />
+
+                        <TextView
+                            android:id="@+id/textView109"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="No of previous owners"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_bike_color" />
+
+                        <TextView
+                            android:id="@+id/textView110"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Running Kilometers"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_bike_previous_owners" />
+
+                        <TextView
+                            android:id="@+id/textView111"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Selling Price"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_bike_total_kilometers" />
+
+                        <TextView
+                            android:id="@+id/textView112"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Selling Location"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_bike_selling_price" />
+
+                        <TextView
+                            android:id="@+id/textView113"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="Upload Image"
+                            android:textColor="@color/color_575757"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_edit_bike_selling_location" />
+
+                        <ProgressBar
+                            android:id="@+id/progress_bar_edit_bike"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:visibility="invisible"
+                            android:indeterminate="true"
+                            android:indeterminateTintMode="src_atop"
+                            android:indeterminateTint="@color/button_color"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>
