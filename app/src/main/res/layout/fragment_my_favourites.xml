@@ -39,7 +39,7 @@
 
 
                         <TextView
-                            android:id="@+id/textView79"
+                            android:id="@+id/text_view_fav_cars"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Favourite Cars"
@@ -56,10 +56,10 @@
                             android:layout_marginTop="20dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView79" />
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_fav_cars" />
 
                         <TextView
-                            android:id="@+id/textView80"
+                            android:id="@+id/text_view_fav_bikes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="24dp"
@@ -77,7 +77,7 @@
                             android:layout_marginTop="20dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView80" />
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_fav_bikes" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

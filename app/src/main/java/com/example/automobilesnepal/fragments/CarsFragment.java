@@ -1,6 +1,5 @@
 package com.example.automobilesnepal.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +10,12 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.automobilesnepal.BrandCarsListActivity;
-import com.example.automobilesnepal.CarDetailsActivity;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.adapters.CarBrandsAdapter;
 import com.example.automobilesnepal.adapters.CarsAdapter;
@@ -29,11 +25,8 @@ import com.example.automobilesnepal.models.CarBrandsModel;
 import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.models.UsedCarsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
-import com.example.automobilesnepal.utils.GridSpacingItemDecoration;
 import com.example.automobilesnepal.utils.ItemClickSupport;
 import com.example.automobilesnepal.utils.SpacesItemDecoration;
-import com.example.automobilesnepal.utils.SharedPrefManager;
-import com.example.automobilesnepal.utils.User;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
@@ -42,13 +35,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -74,6 +64,7 @@ public class CarsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cars, container, false);
+
 
         image_button_bar = view.findViewById(R.id.image_button_bar);
         image_button_heart = view.findViewById(R.id.image_button_heart);
@@ -171,10 +162,28 @@ public class CarsFragment extends Fragment {
             }
         });
 
-        searchView.setOnClickListener(new View.OnClickListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery", query);
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        image_button_heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked on cars fragment", Toast.LENGTH_SHORT).show();
+                openFragment(new MyFavouritesFragment());
             }
         });
 

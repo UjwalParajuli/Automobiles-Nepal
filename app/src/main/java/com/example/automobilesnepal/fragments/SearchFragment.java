@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,15 +16,16 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.automobilesnepal.MainActivity;
 import com.example.automobilesnepal.R;
+import com.example.automobilesnepal.adapters.AccessoryAdapter;
 import com.example.automobilesnepal.adapters.BikesAdapter;
 import com.example.automobilesnepal.adapters.CarsAdapter;
+import com.example.automobilesnepal.models.AccessoriesModel;
 import com.example.automobilesnepal.models.BikesModel;
 import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
+import com.example.automobilesnepal.utils.GridSpacingItemDecoration;
 import com.example.automobilesnepal.utils.ItemClickSupport;
-import com.example.automobilesnepal.utils.SharedPrefManager;
 import com.example.automobilesnepal.utils.SpacesItemDecoration;
-import com.example.automobilesnepal.utils.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,57 +38,68 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyFavouritesFragment extends Fragment {
-    private RecyclerView recycler_view_fragment_favourite_cars, recycler_view_fragment_favourite_bikes;
+public class SearchFragment extends Fragment {
+    private Bundle bundle;
+    private LinearLayout search_layout_new_cars, search_layout_accessories, search_layout_new_bikes;
+    private RecyclerView recycler_view_fragment_search_accessories, recycler_view_fragment_search_new_cars, recycler_view_fragment_search_new_bikes;
+    private ArrayList<AccessoriesModel> accessoriesModelArrayList;
     private ArrayList<CarsModel> carsModelArrayList;
     private ArrayList<BikesModel> bikesModelArrayList;
+    private AccessoryAdapter accessoryAdapter;
     private CarsAdapter carsAdapter;
     private BikesAdapter bikesAdapter;
-    private TextView text_view_fav_bikes, text_view_fav_cars;
-    private User user;
+    private String query;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_favourites, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
 
         MainActivity activity = (MainActivity) getActivity();
         if (activity != null)
             activity.hideBottomBar(true);
 
-        user = SharedPrefManager.getInstance(getContext()).getUser();
+        Bundle bundle = this.getArguments();
+        if (bundle != null){
+            query = bundle.getString("searchQuery");
+        }
 
-        recycler_view_fragment_favourite_cars = view.findViewById(R.id.recycler_view_fragment_favourite_cars);
-        recycler_view_fragment_favourite_bikes = view.findViewById(R.id.recycler_view_fragment_favourite_bikes);
+        search_layout_new_cars = view.findViewById(R.id.search_layout_new_cars);
+        search_layout_new_bikes = view.findViewById(R.id.search_layout_new_bikes);
+        search_layout_accessories = view.findViewById(R.id.search_layout_accessories);
 
+        recycler_view_fragment_search_accessories = view.findViewById(R.id.recycler_view_fragment_search_accessories);
+        recycler_view_fragment_search_new_bikes = view.findViewById(R.id.recycler_view_fragment_search_new_bikes);
+        recycler_view_fragment_search_new_cars = view.findViewById(R.id.recycler_view_fragment_search_new_cars);
+
+        accessoriesModelArrayList = new ArrayList<>();
         carsModelArrayList = new ArrayList<>();
         bikesModelArrayList = new ArrayList<>();
 
+        accessoryAdapter = new AccessoryAdapter(accessoriesModelArrayList, getContext());
         carsAdapter = new CarsAdapter(carsModelArrayList, getContext());
         bikesAdapter = new BikesAdapter(bikesModelArrayList, getContext());
 
-        text_view_fav_bikes = view.findViewById(R.id.text_view_fav_bikes);
-        text_view_fav_cars = view.findViewById(R.id.text_view_fav_cars);
-
-        getFavouriteCars();
-        getFavouriteBikes();
+        searchCars();
+        searchBikes();
+        searchAccessories();
 
         return view;
     }
 
-    private void getFavouriteCars(){
-        String url = "http://192.168.1.65:81/android/get_favourite_cars.php";
+    private void searchCars(){
+        String url = "http://192.168.1.65:81/android/search_cars.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.trim().equals("not_found")) {
-                    text_view_fav_cars.setVisibility(View.GONE);
-                    recycler_view_fragment_favourite_cars.setVisibility(View.GONE);
+                    search_layout_new_cars.setVisibility(View.GONE);
 
                 }
                 else{
@@ -122,12 +134,12 @@ public class MyFavouritesFragment extends Fragment {
                         }
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                        recycler_view_fragment_favourite_cars.setLayoutManager(linearLayoutManager);
-                        recycler_view_fragment_favourite_cars.setAdapter(carsAdapter);
-                        recycler_view_fragment_favourite_cars.addItemDecoration(new SpacesItemDecoration(20));
+                        recycler_view_fragment_search_new_cars.setLayoutManager(linearLayoutManager);
+                        recycler_view_fragment_search_new_cars.setAdapter(carsAdapter);
+                        recycler_view_fragment_search_new_cars.addItemDecoration(new SpacesItemDecoration(20));
                         carsAdapter.notifyDataSetChanged();
 
-                        ItemClickSupport.addTo(recycler_view_fragment_favourite_cars).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                        ItemClickSupport.addTo(recycler_view_fragment_search_new_cars).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                             @Override
                             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                                 CarsModel car_model = carsModelArrayList.get(position);
@@ -164,24 +176,24 @@ public class MyFavouritesFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("user_id", String.valueOf(user.getId()));
+                params.put("search_query", query);
                 return params;
             }
 
         };
         requestQueue.add(stringRequest);
+
     }
 
-    private void getFavouriteBikes(){
-        String url = "http://192.168.1.65:81/android/get_favourite_bikes.php";
+    private void searchBikes(){
+        String url = "http://192.168.1.65:81/android/search_bikes.php";
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response.trim().equals("not_found")) {
-                    text_view_fav_bikes.setVisibility(View.GONE);
-                    recycler_view_fragment_favourite_bikes.setVisibility(View.GONE);
+                    search_layout_new_bikes.setVisibility(View.GONE);
 
                 }
                 else{
@@ -217,12 +229,12 @@ public class MyFavouritesFragment extends Fragment {
                         }
 
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
-                        recycler_view_fragment_favourite_bikes.setLayoutManager(linearLayoutManager);
-                        recycler_view_fragment_favourite_bikes.setAdapter(bikesAdapter);
-                        recycler_view_fragment_favourite_bikes.addItemDecoration(new SpacesItemDecoration(20));
+                        recycler_view_fragment_search_new_bikes.setLayoutManager(linearLayoutManager);
+                        recycler_view_fragment_search_new_bikes.setAdapter(bikesAdapter);
+                        recycler_view_fragment_search_new_bikes.addItemDecoration(new SpacesItemDecoration(20));
                         bikesAdapter.notifyDataSetChanged();
 
-                        ItemClickSupport.addTo(recycler_view_fragment_favourite_bikes).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                        ItemClickSupport.addTo(recycler_view_fragment_search_new_bikes).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                             @Override
                             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                                 BikesModel bike_model = bikesModelArrayList.get(position);
@@ -259,7 +271,7 @@ public class MyFavouritesFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("user_id", String.valueOf(user.getId()));
+                params.put("search_query", query);
                 return params;
             }
 
@@ -268,6 +280,85 @@ public class MyFavouritesFragment extends Fragment {
 
     }
 
+    private void searchAccessories(){
+        String url = "http://192.168.1.65:81/android/search_accessories.php";
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.trim().equals("not_found")) {
+                    search_layout_accessories.setVisibility(View.GONE);
+
+                }
+                else{
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonResponse;
+
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            jsonResponse = jsonArray.getJSONObject(i);
+                            int accessory_id = jsonResponse.getInt("accessory_id");
+                            String title = jsonResponse.getString("title");
+                            String type = jsonResponse.getString("type");
+                            String description = jsonResponse.getString("description");
+                            String image = jsonResponse.getString("image");
+                            String vehicle = jsonResponse.getString("vehicle");
+                            double price = jsonResponse.getDouble("price");
+                            int available_quantity = jsonResponse.getInt("available_quantity");
+
+                            AccessoriesModel accessoriesModel = new AccessoriesModel(accessory_id, available_quantity, price, title, type, description, vehicle, image);
+                            accessoriesModelArrayList.add(accessoriesModel);
+                        }
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                        recycler_view_fragment_search_accessories.setLayoutManager(linearLayoutManager);
+                        recycler_view_fragment_search_accessories.setAdapter(accessoryAdapter);
+                        recycler_view_fragment_search_accessories.addItemDecoration(new SpacesItemDecoration(20));
+                        accessoryAdapter.notifyDataSetChanged();
+
+                        ItemClickSupport.addTo(recycler_view_fragment_search_accessories).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                AccessoriesModel accessoriesModel = accessoriesModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("accessory_details", accessoriesModel);
+                                Fragment carAccessoryDetailsFragment = new CarAccessoryDetailsFragment();
+                                carAccessoryDetailsFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, carAccessoryDetailsFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
+
+
+                    }
+
+                    catch (JSONException e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("search_query", query);
+                return params;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+
+    }
 
     @Override
     public void onDestroyView() {

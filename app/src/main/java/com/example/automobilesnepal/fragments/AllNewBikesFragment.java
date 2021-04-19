@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,6 +39,9 @@ public class AllNewBikesFragment extends Fragment {
     private ArrayList<BikesModel> bikesModelArrayList;
     private BikesAdapter bikesAdapter;
 
+    private ImageButton image_button_bar, image_button_heart;
+    private SearchView searchView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,6 +50,10 @@ public class AllNewBikesFragment extends Fragment {
         recycler_view_fragment_all_new_bikes = view.findViewById(R.id.recycler_view_fragment_all_new_bikes);
         bikesModelArrayList = new ArrayList<>();
         bikesAdapter = new BikesAdapter(bikesModelArrayList, getContext());
+
+        image_button_bar = view.findViewById(R.id.image_button_bar);
+        image_button_heart = view.findViewById(R.id.image_button_heart);
+        searchView = view.findViewById(R.id.search_view);
 
         getAllNewBikes();
 

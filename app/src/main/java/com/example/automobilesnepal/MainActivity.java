@@ -4,11 +4,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.automobilesnepal.fragments.BikesFragment;
+import com.example.automobilesnepal.fragments.BrandCarsListFragment;
 import com.example.automobilesnepal.fragments.CarsFragment;
 import com.example.automobilesnepal.fragments.DealersFragment;
+import com.example.automobilesnepal.fragments.NewCarDetailsFragment;
 import com.example.automobilesnepal.fragments.NewsFragment;
+import com.example.automobilesnepal.models.CarsModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.annotation.NonNull;
@@ -25,8 +30,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         bottom_navigation_view =(BottomNavigationView) findViewById(R.id.bottom_navigation_view);
         bottom_navigation_view.setOnNavigationItemSelectedListener(nav_listener);
+        hideBottomBar(false); // to have it visible by default
+
 
         //I added this if statement to keep the selected fragment when rotating the device
         if (savedInstanceState == null) {
@@ -34,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
                     new CarsFragment()).commit();
         }
 
+    }
+
+    public void hideBottomBar(boolean isHidden){
+        bottom_navigation_view.setVisibility(isHidden ? View.GONE : View.VISIBLE);
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener nav_listener =
