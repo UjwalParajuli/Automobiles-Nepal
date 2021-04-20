@@ -158,7 +158,7 @@ public class CarsFragment extends Fragment {
         image_button_bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked on cars fragment", Toast.LENGTH_SHORT).show();
+                openFragment(new ProfileFragment());
             }
         });
 

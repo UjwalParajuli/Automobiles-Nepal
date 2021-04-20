@@ -33,7 +33,7 @@ import java.util.Map;
 public class LoginActivity extends AppCompatActivity {
     private EditText edit_text_email, edit_text_password;
     private Button button_login;
-    private TextView text_view_signup;
+    private TextView text_view_signup, text_view_forgot_password;
     private ProgressBar progress_bar_login;
 
     @Override
@@ -50,10 +50,20 @@ public class LoginActivity extends AppCompatActivity {
 
         progress_bar_login = (ProgressBar) findViewById(R.id.progress_bar_login);
 
+        text_view_forgot_password = findViewById(R.id.text_view_forgot_password);
+
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 login();
+            }
+        });
+
+        text_view_forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
     }
