@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.automobilesnepal.LoginActivity;
@@ -23,6 +25,8 @@ import androidx.fragment.app.FragmentManager;
 public class ProfileFragment extends Fragment {
     private TextView text_view_profile_name, text_view_profile_details, text_view_edit_profile, text_view_edit_password, text_view_my_bookings, text_view_my_vehicles, text_view_logout;
     private User user;
+    private ImageButton image_button_bar, image_button_heart;
+    private SearchView searchView;
 
     @Nullable
     @Override
@@ -99,6 +103,42 @@ public class ProfileFragment extends Fragment {
                 });
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+            }
+        });
+
+        image_button_bar = view.findViewById(R.id.image_button_bar);
+        image_button_heart = view.findViewById(R.id.image_button_heart);
+        searchView = view.findViewById(R.id.search_view);
+
+        image_button_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new ProfileFragment());
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery", query);
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        image_button_heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new MyFavouritesFragment());
             }
         });
 

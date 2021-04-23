@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +43,7 @@ public class AllNewCarsFragment extends Fragment {
     private ArrayList<CarsModel> carsModelArrayList;
     private CarsAdapter carsAdapter;
 
-    private ImageButton imageButton;
+    private ImageButton image_button_bar, image_button_heart;
     private SearchView searchView;
 
     @Nullable
@@ -50,29 +51,53 @@ public class AllNewCarsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_all_new_cars, container, false);
 
-        imageButton = view.findViewById(R.id.image_button_bar);
+        image_button_bar = view.findViewById(R.id.image_button_bar);
+        image_button_heart = view.findViewById(R.id.image_button_heart);
         searchView = view.findViewById(R.id.search_view);
 
         recycler_view_all_new_cars = view.findViewById(R.id.recycler_view_fragment_all_new_cars);
         carsModelArrayList = new ArrayList<>();
         carsAdapter = new CarsAdapter(carsModelArrayList, getContext());
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        image_button_bar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked on all new cars fragment", Toast.LENGTH_SHORT).show();
+                openFragment(new ProfileFragment());
             }
         });
 
-        searchView.setOnClickListener(new View.OnClickListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery", query);
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        image_button_heart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Clicked on all new cars fragment", Toast.LENGTH_SHORT).show();
+                openFragment(new MyFavouritesFragment());
             }
         });
 
         getAllNewCars();
         return view;
+    }
+
+    private void openFragment(Fragment fragment){
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 
     private void getAllNewCars(){

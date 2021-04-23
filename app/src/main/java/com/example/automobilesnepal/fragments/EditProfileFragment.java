@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -55,6 +57,9 @@ public class EditProfileFragment extends Fragment {
                     ".{6,}" +               //at least 6 characters
                     "$");
 
+    private ImageButton image_button_bar, image_button_heart;
+    private SearchView searchView;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -88,7 +93,48 @@ public class EditProfileFragment extends Fragment {
             }
         });
 
+        image_button_bar = view.findViewById(R.id.image_button_bar);
+        image_button_heart = view.findViewById(R.id.image_button_heart);
+        searchView = view.findViewById(R.id.search_view);
+
+        image_button_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new ProfileFragment());
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery", query);
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        image_button_heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new MyFavouritesFragment());
+            }
+        });
+
         return view;
+    }
+
+    private void openFragment(Fragment fragment){
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 
     private TextWatcher nameTextWatcher = new TextWatcher() {

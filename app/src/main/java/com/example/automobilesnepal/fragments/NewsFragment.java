@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,6 +31,7 @@ import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,6 +39,8 @@ public class NewsFragment extends Fragment {
     private RecyclerView recycler_view_latest_news;
     private ArrayList<NewsModel> newsModelArrayList;
     private NewsAdapter newsAdapter;
+    private ImageButton image_button_bar, image_button_heart;
+    private SearchView searchView;
 
     @Nullable
     @Override
@@ -46,8 +51,49 @@ public class NewsFragment extends Fragment {
         newsModelArrayList = new ArrayList<>();
         newsAdapter = new NewsAdapter(newsModelArrayList, getContext());
 
+        image_button_bar = view.findViewById(R.id.image_button_bar);
+        image_button_heart = view.findViewById(R.id.image_button_heart);
+        searchView = view.findViewById(R.id.search_view);
+
+        image_button_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new ProfileFragment());
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery", query);
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        image_button_heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new MyFavouritesFragment());
+            }
+        });
+
         getNewsData();
         return view;
+    }
+
+    private void openFragment(Fragment fragment){
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 
     private void getNewsData(){

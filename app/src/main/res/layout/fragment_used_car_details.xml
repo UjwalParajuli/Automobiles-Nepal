@@ -285,6 +285,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -305,8 +306,7 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/button_delete_used_car"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_delete_used_car"
@@ -324,7 +324,6 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/button_edit_used_car"
-        />
+        app:layout_constraintStart_toEndOf="@id/button_edit_used_car" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

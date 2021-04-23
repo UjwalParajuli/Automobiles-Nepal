@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +60,8 @@ public class UsedCarDetailsFragment extends Fragment {
     private TextView text_view_car_name_used_car_details, text_view_price_used_car_details, text_view_registered_year_used_car_details, text_view_color_used_car_details,
             text_view_no_of_ex_owners_used_car_details, text_view_total_km_used_car_details, text_view_selling_location_used_car_details, text_view_posted_date_used_car_details;
     private Button button_book_used_car, button_edit_used_car, button_delete_used_car;
-
+    private ImageButton image_button_bar, image_button_heart;
+    private SearchView searchView;
 
     @Nullable
     @Override
@@ -111,7 +114,48 @@ public class UsedCarDetailsFragment extends Fragment {
             }
         });
 
+        image_button_bar = view.findViewById(R.id.image_button_bar);
+        image_button_heart = view.findViewById(R.id.image_button_heart);
+        searchView = view.findViewById(R.id.search_view);
+
+        image_button_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new ProfileFragment());
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery", query);
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        image_button_heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new MyFavouritesFragment());
+            }
+        });
+
         return view;
+    }
+
+    private void openFragment(Fragment fragment){
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit();
     }
 
     private void setData(){

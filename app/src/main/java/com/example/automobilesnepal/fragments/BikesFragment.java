@@ -1,6 +1,5 @@
 package com.example.automobilesnepal.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,23 +16,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.automobilesnepal.BrandCarsListActivity;
-import com.example.automobilesnepal.CarDetailsActivity;
 import com.example.automobilesnepal.R;
 import com.example.automobilesnepal.adapters.BikeBrandsAdapter;
 import com.example.automobilesnepal.adapters.BikeSliderAdapter;
 import com.example.automobilesnepal.adapters.BikesAdapter;
-import com.example.automobilesnepal.adapters.CarBrandsAdapter;
-import com.example.automobilesnepal.adapters.CarsAdapter;
-import com.example.automobilesnepal.adapters.SliderAdapterExample;
 import com.example.automobilesnepal.adapters.UsedBikesAdapter;
-import com.example.automobilesnepal.adapters.UsedCarsAdapter;
 import com.example.automobilesnepal.models.BikeBrandsModel;
 import com.example.automobilesnepal.models.BikesModel;
-import com.example.automobilesnepal.models.CarBrandsModel;
-import com.example.automobilesnepal.models.CarsModel;
 import com.example.automobilesnepal.models.UsedBikesModel;
-import com.example.automobilesnepal.models.UsedCarsModel;
 import com.example.automobilesnepal.utils.ErrorUtils;
 import com.example.automobilesnepal.utils.ItemClickSupport;
 import com.example.automobilesnepal.utils.SpacesItemDecoration;
@@ -158,6 +148,38 @@ public class BikesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openFragment(new CarValuationFragment());
+            }
+        });
+
+        image_button_bar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new ProfileFragment());
+            }
+        });
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("searchQuery", query);
+                Fragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                manager.beginTransaction().replace(R.id.fragment_container, searchFragment).addToBackStack(null).commit();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+        image_button_heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new MyFavouritesFragment());
             }
         });
 
