@@ -121,6 +121,17 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/textView31" />
 
+                        <TextView
+                            android:id="@+id/text_view_price_info"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Note : The final selling price of the car will be increased by 3% of your selling price. After the successful selling of the car, 3% will be deducted from the total selling price as an Automobiles Nepal commission."
+                            android:textColor="@color/button_color"
+                            app:layout_constraintEnd_toEndOf="@id/edit_text_car_selling_price"
+                            app:layout_constraintStart_toStartOf="@id/edit_text_car_selling_price"
+                            app:layout_constraintTop_toBottomOf="@id/edit_text_car_selling_price" />
+
                         <EditText
                             android:id="@+id/edit_text_car_selling_location"
                             android:layout_width="0dp"
@@ -288,7 +299,7 @@
                             android:textColor="@color/color_575757"
                             android:textSize="14dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/edit_text_car_selling_price" />
+                            app:layout_constraintTop_toBottomOf="@id/text_view_price_info" />
 
                         <TextView
                             android:id="@+id/textView30"

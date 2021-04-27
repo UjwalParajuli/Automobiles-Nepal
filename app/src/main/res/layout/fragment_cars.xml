@@ -2,7 +2,6 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -125,7 +124,7 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginEnd="5dp"
                                 android:background="@drawable/ic_features_button_background_dark"
-                                android:drawableLeft="@drawable/ic_compare"
+                                android:drawableLeft="@drawable/ic_gear_2"
                                 android:drawablePadding="10dp"
                                 android:fontFamily="@font/coco_gothic_regular"
                                 android:paddingLeft="21dp"
@@ -213,7 +212,7 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/used_cars_linear_layout"
+                        android:id="@+id/body_type_cars_linear_layout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="56dp"
@@ -226,6 +225,112 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
+
+                            <TextView
+                                android:id="@+id/text_view_body_type_cars"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/coco_gothic_bold"
+                                android:text="Browse Cars by Body Type"
+                                android:textColor="@color/login_credentials_heading"
+                                android:textSize="18dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/body_type_cars_recycler_view"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="11dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/text_view_body_type_cars" />
+
+                            <TextView
+                                android:id="@+id/text_view_view_all_body_type_cars"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="View All"
+                                android:fontFamily="@font/roboto_regular"
+                                android:textSize="14dp"
+                                android:textColor="@color/button_color"
+                                app:layout_constraintBottom_toBottomOf="@+id/text_view_body_type_cars"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/text_view_body_type_cars" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/fuel_type_cars_linear_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="56dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/body_type_cars_linear_layout"
+                        app:layout_constraintStart_toStartOf="@+id/body_type_cars_linear_layout"
+                        app:layout_constraintTop_toBottomOf="@id/body_type_cars_linear_layout">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+
+                            <TextView
+                                android:id="@+id/text_view_fuel_type_cars"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/coco_gothic_bold"
+                                android:text="Browse Cars by Fuel Type"
+                                android:textColor="@color/login_credentials_heading"
+                                android:textSize="18dp"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/fuel_type_cars_recycler_view"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="11dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/text_view_fuel_type_cars" />
+
+                            <TextView
+                                android:id="@+id/text_view_view_all_fuel_type_cars"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="View All"
+                                android:fontFamily="@font/roboto_regular"
+                                android:textSize="14dp"
+                                android:textColor="@color/button_color"
+                                android:visibility="gone"
+                                app:layout_constraintBottom_toBottomOf="@+id/text_view_fuel_type_cars"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="@+id/text_view_fuel_type_cars" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/used_cars_linear_layout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="56dp"
+                        android:orientation="vertical"
+                        app:layout_constraintEnd_toEndOf="@+id/fuel_type_cars_linear_layout"
+                        app:layout_constraintStart_toStartOf="@+id/fuel_type_cars_linear_layout"
+                        app:layout_constraintTop_toBottomOf="@id/fuel_type_cars_linear_layout">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
                             <TextView
                                 android:id="@+id/text_view_used_cars"
@@ -318,177 +423,10 @@
 
                     </LinearLayout>
 
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
             </androidx.core.widget.NestedScrollView>
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="20dp"-->
-<!--            android:orientation="vertical"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/include">-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-
-<!--                <com.smarteist.autoimageslider.SliderView-->
-<!--                    android:id="@+id/image_slider_cars"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="216dp"-->
-<!--                    android:layout_marginTop="20dp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:sliderAnimationDuration="600"-->
-<!--                    app:sliderAutoCycleDirection="back_and_forth"-->
-<!--                    app:sliderIndicatorAnimationDuration="600"-->
-<!--                    app:sliderIndicatorEnabled="true"-->
-<!--                    app:sliderIndicatorGravity="center_horizontal|bottom"-->
-<!--                    app:sliderIndicatorMargin="15dp"-->
-<!--                    app:sliderIndicatorOrientation="horizontal"-->
-<!--                    app:sliderIndicatorPadding="3dp"-->
-<!--                    app:sliderIndicatorRadius="2dp"-->
-<!--                    app:sliderIndicatorSelectedColor="#5A5A5A"-->
-<!--                    app:sliderIndicatorUnselectedColor="#FFF"-->
-<!--                    app:sliderScrollTimeInSec="1" />-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/brands_linear_layout"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:orientation="vertical"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/image_slider_cars">-->
-
-<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/text_view_brands"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:fontFamily="@font/coco_gothic_heavy"-->
-<!--                            android:text="Filter Cars by Brand"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textSize="24sp"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/brands_recycler_view"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="8dp"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toBottomOf="@+id/text_view_brands" />-->
-
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--                </LinearLayout>-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/new_cars_linear_layout"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="8dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    android:orientation="vertical"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/brands_linear_layout">-->
-
-<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/text_view_new_cars"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:fontFamily="@font/coco_gothic_heavy"-->
-<!--                            android:text="New Cars"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textSize="24sp"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/new_cars_recycler_view"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="8dp"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toBottomOf="@+id/text_view_new_cars" />-->
-
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--                </LinearLayout>-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/used_cars_linear_layout"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="8dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    android:orientation="vertical"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/new_cars_linear_layout">-->
-
-<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content">-->
-
-
-<!--                        <TextView-->
-<!--                            android:id="@+id/text_view_used_cars"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:fontFamily="@font/coco_gothic_heavy"-->
-<!--                            android:text="Browse Used Cars"-->
-<!--                            android:textColor="@color/black"-->
-<!--                            android:textSize="24sp"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                        <androidx.recyclerview.widget.RecyclerView-->
-<!--                            android:id="@+id/used_cars_recycler_view"-->
-<!--                            android:layout_width="0dp"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginTop="8dp"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintTop_toBottomOf="@+id/text_view_used_cars" />-->
-
-
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--                </LinearLayout>-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </LinearLayout>-->
 
 </RelativeLayout>

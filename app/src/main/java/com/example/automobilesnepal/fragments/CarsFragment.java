@@ -17,8 +17,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.automobilesnepal.R;
+import com.example.automobilesnepal.adapters.BodyTypeAdapter;
 import com.example.automobilesnepal.adapters.CarBrandsAdapter;
 import com.example.automobilesnepal.adapters.CarsAdapter;
+import com.example.automobilesnepal.adapters.FuelTypeAdapter;
 import com.example.automobilesnepal.adapters.SliderAdapterExample;
 import com.example.automobilesnepal.adapters.UsedCarsAdapter;
 import com.example.automobilesnepal.models.CarBrandsModel;
@@ -45,18 +47,24 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CarsFragment extends Fragment {
     SliderView sliderView;
     private SliderAdapterExample adapter;
-    private RecyclerView recycler_view_brands, recycler_view_new_cars, recycler_view_used_cars;
+    private RecyclerView recycler_view_brands, recycler_view_new_cars, recycler_view_used_cars, fuel_type_cars_recycler_view, body_type_cars_recycler_view;
     private ArrayList<CarBrandsModel> carBrandsModelArrayList;
     private ArrayList<CarsModel> newCarsModelArrayList;
+    private ArrayList<CarsModel> bodyTypeCarsModelArrayList;
+    private ArrayList<CarsModel> fuelTypeCarsModelArrayList;
     private ArrayList<UsedCarsModel> usedCarsModelArrayList;
     private CarBrandsAdapter carBrandsAdapter;
     private CarsAdapter newCarsAdapter;
+    private BodyTypeAdapter bodyTypeAdapter;
+    private FuelTypeAdapter fuelTypeAdapter;
     private UsedCarsAdapter usedCarsAdapter;
 
     private Button button_sell_car, button_compare_car, button_accessories, button_car_valuation;
     private TextView text_view_view_all_brands;
     private TextView text_view_view_all_new_cars;
     private TextView text_view_view_all_used_cars;
+    private TextView text_view_view_all_body_type_cars;
+    private TextView text_view_view_all_fuel_type_cars;
     private ImageButton image_button_bar, image_button_heart;
     private SearchView searchView;
 
@@ -87,14 +95,20 @@ public class CarsFragment extends Fragment {
         recycler_view_brands =view.findViewById(R.id.brands_recycler_view);
         recycler_view_new_cars =view.findViewById(R.id.new_cars_recycler_view);
         recycler_view_used_cars = view.findViewById(R.id.used_cars_recycler_view);
+        body_type_cars_recycler_view = view.findViewById(R.id.body_type_cars_recycler_view);
+        fuel_type_cars_recycler_view = view.findViewById(R.id.fuel_type_cars_recycler_view);
 
         carBrandsModelArrayList = new ArrayList<>();
         newCarsModelArrayList = new ArrayList<>();
         usedCarsModelArrayList = new ArrayList<>();
+        bodyTypeCarsModelArrayList = new ArrayList<>();
+        fuelTypeCarsModelArrayList = new ArrayList<>();
 
         carBrandsAdapter = new CarBrandsAdapter(carBrandsModelArrayList, getContext());
         newCarsAdapter = new CarsAdapter(newCarsModelArrayList, getContext());
         usedCarsAdapter = new UsedCarsAdapter(usedCarsModelArrayList, getContext());
+        bodyTypeAdapter = new BodyTypeAdapter(bodyTypeCarsModelArrayList, getContext());
+        fuelTypeAdapter = new FuelTypeAdapter(fuelTypeCarsModelArrayList, getContext());
 
         button_sell_car = view.findViewById(R.id.button_sell_car);
         button_compare_car = view.findViewById(R.id.button_compare_cars);
@@ -104,6 +118,8 @@ public class CarsFragment extends Fragment {
         text_view_view_all_brands = view.findViewById(R.id.text_view_view_all_brands);
         text_view_view_all_new_cars = view.findViewById(R.id.text_view_view_all_new_cars);
         text_view_view_all_used_cars = view.findViewById(R.id.text_view_view_all_used_cars);
+        text_view_view_all_body_type_cars = view.findViewById(R.id.text_view_view_all_body_type_cars);
+        text_view_view_all_fuel_type_cars = view.findViewById(R.id.text_view_view_all_fuel_type_cars);
 
         text_view_view_all_brands.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +140,13 @@ public class CarsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openFragment(new AllUsedCarsFragment());
+            }
+        });
+
+        text_view_view_all_body_type_cars.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new AllBodyTypeFragments());
             }
         });
 
@@ -193,6 +216,8 @@ public class CarsFragment extends Fragment {
 
         addNewItem();
         getNewCars();
+        getCarBodyType();
+        getCarFuelType();
         getUsedCars();
         getBrands();
 
@@ -480,7 +505,6 @@ public class CarsFragment extends Fragment {
                             adapter.addItem(carsModel);
                         }
 
-
                     }
 
                     catch (JSONException e) {
@@ -500,6 +524,174 @@ public class CarsFragment extends Fragment {
         };
         requestQueue.add(stringRequest);
 
+    }
+
+    private void getCarBodyType(){
+        String url = "http://192.168.1.65:81/android/get_body_types.php";
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.trim().equals("not_found")) {
+                    Toast.makeText(getContext(), "No any cars found", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonResponse;
+
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            jsonResponse = jsonArray.getJSONObject(i);
+                            int car_model_id = jsonResponse.getInt("car_model_id");
+                            String model_name = jsonResponse.getString("model_name");
+                            String brand_name = jsonResponse.getString("brand_name");
+                            String brand_logo = jsonResponse.getString("brand_logo");
+                            String mileage = jsonResponse.getString("mileage");
+                            String fuel_type = jsonResponse.getString("fuel_type");
+                            String displacement = jsonResponse.getString("displacement");
+                            String max_power = jsonResponse.getString("max_power");
+                            String max_torque = jsonResponse.getString("max_torque");
+                            String seat_capacity = jsonResponse.getString("seat_capacity");
+                            String transmission_type = jsonResponse.getString("transmission_type");
+                            String boot_space = jsonResponse.getString("boot_space");
+                            String fuel_capacity = jsonResponse.getString("fuel_capacity");
+                            String body_type = jsonResponse.getString("body_type");
+                            String image = jsonResponse.getString("image");
+                            String price = jsonResponse.getString("price");
+                            String description = jsonResponse.getString("description");
+                            String video_link = jsonResponse.getString("car_review_video_link");
+                            String car_color = jsonResponse.getString("new_car_color");
+
+                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
+                            bodyTypeCarsModelArrayList.add(carsModel);
+                        }
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                        body_type_cars_recycler_view.setLayoutManager(linearLayoutManager);
+                        body_type_cars_recycler_view.setAdapter(bodyTypeAdapter);
+                        body_type_cars_recycler_view.addItemDecoration(new SpacesItemDecoration(20));
+                        bodyTypeAdapter.notifyDataSetChanged();
+
+                        ItemClickSupport.addTo(body_type_cars_recycler_view).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                CarsModel car_model = bodyTypeCarsModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("body_type", car_model);
+                                Fragment bodyTypeCarsFragment = new BodyTypeCarsFragment();
+                                bodyTypeCarsFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, bodyTypeCarsFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
+
+
+                    }
+
+                    catch (JSONException e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    private void getCarFuelType(){
+        String url = "http://192.168.1.65:81/android/get_fuel_types.php";
+
+        final RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.trim().equals("not_found")) {
+                    Toast.makeText(getContext(), "No any cars found", Toast.LENGTH_SHORT).show();
+
+                }
+                else{
+                    try {
+                        JSONArray jsonArray = new JSONArray(response);
+                        JSONObject jsonResponse;
+
+                        for (int i = 0; i < jsonArray.length(); i++){
+                            jsonResponse = jsonArray.getJSONObject(i);
+                            int car_model_id = jsonResponse.getInt("car_model_id");
+                            String model_name = jsonResponse.getString("model_name");
+                            String brand_name = jsonResponse.getString("brand_name");
+                            String brand_logo = jsonResponse.getString("brand_logo");
+                            String mileage = jsonResponse.getString("mileage");
+                            String fuel_type = jsonResponse.getString("fuel_type");
+                            String displacement = jsonResponse.getString("displacement");
+                            String max_power = jsonResponse.getString("max_power");
+                            String max_torque = jsonResponse.getString("max_torque");
+                            String seat_capacity = jsonResponse.getString("seat_capacity");
+                            String transmission_type = jsonResponse.getString("transmission_type");
+                            String boot_space = jsonResponse.getString("boot_space");
+                            String fuel_capacity = jsonResponse.getString("fuel_capacity");
+                            String body_type = jsonResponse.getString("body_type");
+                            String image = jsonResponse.getString("image");
+                            String price = jsonResponse.getString("price");
+                            String description = jsonResponse.getString("description");
+                            String video_link = jsonResponse.getString("car_review_video_link");
+                            String car_color = jsonResponse.getString("new_car_color");
+
+                            CarsModel carsModel = new CarsModel(car_model_id, brand_logo, image, model_name, brand_name, description, mileage, fuel_type, displacement, max_power, price, max_torque, seat_capacity, transmission_type, boot_space, fuel_capacity, body_type, video_link, car_color);
+                            fuelTypeCarsModelArrayList.add(carsModel);
+                        }
+
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                        fuel_type_cars_recycler_view.setLayoutManager(linearLayoutManager);
+                        fuel_type_cars_recycler_view.setAdapter(fuelTypeAdapter);
+                        fuel_type_cars_recycler_view.addItemDecoration(new SpacesItemDecoration(20));
+                        fuelTypeAdapter.notifyDataSetChanged();
+
+                        ItemClickSupport.addTo(fuel_type_cars_recycler_view).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+                            @Override
+                            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                                CarsModel car_model = fuelTypeCarsModelArrayList.get(position);
+                                Bundle bundle = new Bundle();
+                                bundle.putSerializable("fuel_type", car_model);
+                                Fragment fuelTypeCarsFragment = new FuelTypeCarsFragment();
+                                fuelTypeCarsFragment.setArguments(bundle);
+                                getFragmentManager()
+                                        .beginTransaction()
+                                        .replace(R.id.fragment_container, fuelTypeCarsFragment)
+                                        .addToBackStack(null).commit();
+                            }
+                        });
+
+
+                    }
+
+                    catch (JSONException e) {
+                        Toast.makeText(getContext(), e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), ErrorUtils.getVolleyError(error), Toast.LENGTH_SHORT).show();
+            }
+        }) {
+
+        };
+        requestQueue.add(stringRequest);
     }
 
 }

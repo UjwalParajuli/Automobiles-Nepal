@@ -77,6 +77,21 @@
                             app:layout_constraintStart_toStartOf="@+id/textView79"
                             app:layout_constraintTop_toBottomOf="@+id/text_view_profile_name" />
 
+                        <TextView
+                            android:id="@+id/textView5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="\u00a9 Automobiles Nepal | Developed by Bibek Chhetri"
+                            android:textColor="@color/white"
+                            android:textSize="12dp"
+                            android:fontFamily="@font/coco_gothic_regular"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

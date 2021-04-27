@@ -1,6 +1,7 @@
 package com.example.automobilesnepal.fragments;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -55,6 +56,7 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -188,7 +190,6 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
                 openFragment(new MyFavouritesFragment());
             }
         });
-
 
         return view;
     }
@@ -335,6 +336,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
 
     private void uploadCar(){
         String selling_car_image, registered_year, car_color, previous_owners, running_km, selling_location, selling_price;
+        double final_selling_price;
         boolean error = false;
         String url = "http://192.168.1.65:81/android/upload_car.php";
 
@@ -383,6 +385,9 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
         }
 
         if (!error){
+            double _selling_price = Double.parseDouble(edit_text_car_selling_price.getText().toString());
+            final_selling_price = 3 / 100f * _selling_price;
+            final double _final_selling_price = _selling_price + final_selling_price;
             progress_bar_sell_car.setVisibility(View.VISIBLE);
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -421,7 +426,7 @@ public class SellCarFragment extends Fragment implements AdapterView.OnItemSelec
                     params.put("running_km", running_km);
                     params.put("selling_location", selling_location);
                     params.put("selling_car_image", selling_car_image);
-                    params.put("selling_car_price", selling_price);
+                    params.put("selling_car_price", String.valueOf(_final_selling_price));
                     params.put("user_id", String.valueOf(user.getId()));
                     return params;
                 }

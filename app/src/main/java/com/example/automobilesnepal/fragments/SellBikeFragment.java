@@ -330,6 +330,7 @@ public class SellBikeFragment extends Fragment implements AdapterView.OnItemSele
 
     private void uploadBike(){
         String selling_bike_image, registered_year, bike_color, previous_owners, running_km, selling_location, selling_price;
+        double final_selling_price;
         boolean error = false;
         String url = "http://192.168.1.65:81/android/upload_bike.php";
 
@@ -378,6 +379,9 @@ public class SellBikeFragment extends Fragment implements AdapterView.OnItemSele
         }
 
         if (!error){
+            double _selling_price = Double.parseDouble(edit_text_bike_selling_price.getText().toString());
+            final_selling_price = 3 / 100f * _selling_price;
+            final double _final_selling_price = _selling_price + final_selling_price;
             progress_bar_sell_bike.setVisibility(View.VISIBLE);
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -416,7 +420,7 @@ public class SellBikeFragment extends Fragment implements AdapterView.OnItemSele
                     params.put("running_km", running_km);
                     params.put("selling_location", selling_location);
                     params.put("selling_bike_image", selling_bike_image);
-                    params.put("selling_bike_price", selling_price);
+                    params.put("selling_bike_price", String.valueOf(_final_selling_price));
                     params.put("user_id", String.valueOf(user.getId()));
                     return params;
                 }

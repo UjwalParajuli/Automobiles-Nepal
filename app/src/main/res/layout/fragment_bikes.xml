@@ -125,7 +125,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="5dp"
                             android:background="@drawable/ic_features_button_background_dark"
-                            android:drawableLeft="@drawable/ic_compare"
+                            android:drawableLeft="@drawable/ic_gear_2"
                             android:drawablePadding="10dp"
                             android:fontFamily="@font/coco_gothic_regular"
                             android:paddingLeft="21dp"
