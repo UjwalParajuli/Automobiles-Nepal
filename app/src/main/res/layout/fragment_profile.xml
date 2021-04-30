@@ -101,9 +101,11 @@
                     android:id="@+id/menu_layout_fragment_profile"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="35dp"
                     android:layout_marginStart="33dp"
+                    android:layout_marginTop="35dp"
                     android:layout_marginEnd="33dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/profile_layout">
@@ -116,12 +118,25 @@
                             android:id="@+id/textView22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Menu"
                             android:fontFamily="@font/coco_gothic_bold"
-                            android:textSize="20dp"
+                            android:text="Menu"
                             android:textColor="@color/login_credentials_heading"
+                            android:textSize="20dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/text_view_notifications"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:fontFamily="@font/roboto_regular"
+                            android:text="Notifications"
+                            android:textColor="@color/login_credentials_heading"
+                            android:textSize="16dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
                         <TextView
                             android:id="@+id/text_view_edit_profile"
@@ -134,17 +149,7 @@
                             android:textSize="16dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-                        <View
-                            android:id="@+id/divider1"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@color/color_E3E3E3"
-                            app:layout_constraintEnd_toEndOf="@id/text_view_edit_profile"
-                            app:layout_constraintStart_toStartOf="@id/text_view_edit_profile"
-                            app:layout_constraintTop_toBottomOf="@+id/text_view_edit_profile" />
+                            app:layout_constraintTop_toBottomOf="@+id/divider9" />
 
                         <TextView
                             android:id="@+id/text_view_edit_password"
@@ -159,16 +164,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
-                        <View
-                            android:id="@+id/divider4"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@color/color_E3E3E3"
-                            app:layout_constraintEnd_toEndOf="@id/text_view_edit_password"
-                            app:layout_constraintStart_toStartOf="@id/text_view_edit_password"
-                            app:layout_constraintTop_toBottomOf="@+id/text_view_edit_password" />
-
                         <TextView
                             android:id="@+id/text_view_my_bookings"
                             android:layout_width="0dp"
@@ -181,16 +176,6 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
-                        <View
-                            android:id="@+id/divider2"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@color/color_E3E3E3"
-                            app:layout_constraintEnd_toEndOf="@id/text_view_my_bookings"
-                            app:layout_constraintStart_toStartOf="@id/text_view_my_bookings"
-                            app:layout_constraintTop_toBottomOf="@+id/text_view_my_bookings" />
 
                         <TextView
                             android:id="@+id/text_view_my_vehicles"
@@ -205,16 +190,6 @@
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
-                        <View
-                            android:id="@+id/divider3"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_marginTop="12dp"
-                            android:background="@color/color_E3E3E3"
-                            app:layout_constraintEnd_toEndOf="@id/text_view_my_vehicles"
-                            app:layout_constraintStart_toStartOf="@id/text_view_my_vehicles"
-                            app:layout_constraintTop_toBottomOf="@+id/text_view_my_vehicles" />
-
                         <TextView
                             android:id="@+id/text_view_logout"
                             android:layout_width="0dp"
@@ -227,6 +202,56 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/divider3" />
+
+                        <View
+                            android:id="@+id/divider9"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/color_E3E3E3"
+                            app:layout_constraintEnd_toEndOf="@id/text_view_notifications"
+                            app:layout_constraintStart_toStartOf="@id/text_view_notifications"
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_notifications" />
+
+                        <View
+                            android:id="@+id/divider1"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/color_E3E3E3"
+                            app:layout_constraintEnd_toEndOf="@id/text_view_edit_profile"
+                            app:layout_constraintStart_toStartOf="@id/text_view_edit_profile"
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_edit_profile" />
+
+                        <View
+                            android:id="@+id/divider4"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/color_E3E3E3"
+                            app:layout_constraintEnd_toEndOf="@id/text_view_edit_password"
+                            app:layout_constraintStart_toStartOf="@id/text_view_edit_password"
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_edit_password" />
+
+                        <View
+                            android:id="@+id/divider2"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/color_E3E3E3"
+                            app:layout_constraintEnd_toEndOf="@id/text_view_my_bookings"
+                            app:layout_constraintStart_toStartOf="@id/text_view_my_bookings"
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_my_bookings" />
+
+                        <View
+                            android:id="@+id/divider3"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="12dp"
+                            android:background="@color/color_E3E3E3"
+                            app:layout_constraintEnd_toEndOf="@id/text_view_my_vehicles"
+                            app:layout_constraintStart_toStartOf="@id/text_view_my_vehicles"
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_my_vehicles" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

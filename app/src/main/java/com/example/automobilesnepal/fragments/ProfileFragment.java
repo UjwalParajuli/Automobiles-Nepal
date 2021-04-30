@@ -23,7 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 public class ProfileFragment extends Fragment {
-    private TextView text_view_profile_name, text_view_profile_details, text_view_edit_profile, text_view_edit_password, text_view_my_bookings, text_view_my_vehicles, text_view_logout;
+    private TextView text_view_profile_name, text_view_notifications, text_view_profile_details, text_view_edit_profile, text_view_edit_password, text_view_my_bookings, text_view_my_vehicles, text_view_logout;
     private User user;
     private ImageButton image_button_bar, image_button_heart;
     private SearchView searchView;
@@ -46,6 +46,7 @@ public class ProfileFragment extends Fragment {
         text_view_my_bookings = view.findViewById(R.id.text_view_my_bookings);
         text_view_my_vehicles = view.findViewById(R.id.text_view_my_vehicles);
         text_view_logout = view.findViewById(R.id.text_view_logout);
+        text_view_notifications = view.findViewById(R.id.text_view_notifications);
 
         text_view_profile_name.setText(user.getFull_name());
         text_view_profile_details.setText(user.getEmail());
@@ -75,6 +76,13 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 openFragment(new MyVehiclesFragment());
+            }
+        });
+
+        text_view_notifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFragment(new NotificationFragment());
             }
         });
 
